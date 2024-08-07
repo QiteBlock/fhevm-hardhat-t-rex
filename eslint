@@ -1,0 +1,804 @@
+
+> @zama-ai/fhevm-hardhat-template@1.0.0 lint /home/qiteblock/fh-evm-bounty/fhevm-hardhat-t-rex
+> pnpm lint:sol && pnpm lint:ts && pnpm prettier:check
+
+
+> @zama-ai/fhevm-hardhat-template@1.0.0 lint:sol /home/qiteblock/fh-evm-bounty/fhevm-hardhat-t-rex
+> solhint --max-warnings 25 "contracts/**/*.sol"
+
+
+contracts/_testContracts/ClaimIssuerTrick.sol
+   7:9  warning  Variable "claimTopic" is unused                 no-unused-vars
+   8:9  warning  Variable "sig" is unused                        no-unused-vars
+   9:9  warning  Variable "data" is unused                       no-unused-vars
+  15:9  warning  Use Custom Errors instead of revert statements  custom-errors
+
+contracts/_testContracts/MockContract.sol
+   5:5   warning  Explicitly mark visibility of state  state-visibility
+   6:5   warning  Explicitly mark visibility of state  state-visibility
+  16:30  warning  Variable "investor" is unused        no-unused-vars
+
+contracts/_testContracts/TestERC20.sol
+  64:1  warning  global import of path @openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  65:1  warning  global import of path @openzeppelin/contracts/access/Ownable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                        no-global-import
+
+contracts/_testContracts/TestUpgradedCountryAllowModule.sol
+  65:1  warning  global import of path ../compliance/modular/modules/CountryAllowModule.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/compliance/legacy/BasicCompliance.sol
+   65:1  warning  global import of path ../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1  warning  global import of path ./ICompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)          no-global-import
+   67:1  warning  global import of path ../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   71:5  warning  Main key parameter in mapping _tokenAgentsList is not named                                                                                                                 named-parameters-mapping
+   71:5  warning  Value parameter in mapping _tokenAgentsList is not named                                                                                                                    named-parameters-mapping
+   80:9  warning  Error message for require is too long: 68 counted / 32 allowed                                                                                                              reason-string
+   80:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+   88:9  warning  Error message for require is too long: 35 counted / 32 allowed                                                                                                              reason-string
+   88:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+  100:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+  109:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+  118:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+  130:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+  131:9  warning  Use Custom Errors instead of require statements                                                                                                                             custom-errors
+
+contracts/compliance/legacy/DefaultCompliance.sol
+   65:1   warning  global import of path ./BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)   no-global-import
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   67:1   warning  global import of path ../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   74:26  warning  Variable "_from" is unused                                                                                                                                               no-unused-vars
+   74:41  warning  Variable "_to" is unused                                                                                                                                                 no-unused-vars
+   74:54  warning  Variable "_value" is unused                                                                                                                                              no-unused-vars
+   84:22  warning  Variable "_to" is unused                                                                                                                                                 no-unused-vars
+   84:35  warning  Variable "_value" is unused                                                                                                                                              no-unused-vars
+   99:62  warning  Variable "_value" is unused                                                                                                                                              no-unused-vars
+  105:77  warning  Code contains empty blocks                                                                                                                                               no-empty-blocks
+
+contracts/compliance/legacy/features/ApproveTransfer.sol
+   65:1  warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   74:5  warning  Main key parameter in mapping _transfersApproved is not named                                                                                                            named-parameters-mapping
+   74:5  warning  Value parameter in mapping _transfersApproved is not named                                                                                                               named-parameters-mapping
+  107:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  139:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+
+contracts/compliance/legacy/features/CountryRestrictions.sol
+   65:1   warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   74:5   warning  Main key parameter in mapping _restrictedCountries is not named                                                                                                          named-parameters-mapping
+   74:5   warning  Value parameter in mapping _restrictedCountries is not named                                                                                                             named-parameters-mapping
+   98:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                             explicit-types
+  111:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                             explicit-types
+  124:9   warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  137:9   warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+
+contracts/compliance/legacy/features/CountryWhitelisting.sol
+   65:1   warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   74:5   warning  Main key parameter in mapping _whitelistedCountries is not named                                                                                                         named-parameters-mapping
+   74:5   warning  Value parameter in mapping _whitelistedCountries is not named                                                                                                            named-parameters-mapping
+   98:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                             explicit-types
+  111:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                             explicit-types
+  124:9   warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  138:9   warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+
+contracts/compliance/legacy/features/DayMonthLimits.sol
+  65:1  warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  66:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+  88:5  warning  Main key parameter in mapping usersCounters is not named                                                                                                                 named-parameters-mapping
+  88:5  warning  Value parameter in mapping usersCounters is not named                                                                                                                    named-parameters-mapping
+
+contracts/compliance/legacy/features/ExchangeMonthlyLimits.sol
+   65:1  warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   80:5  warning  Main key parameter in mapping _exchangeMonthlyLimit is not named                                                                                                         named-parameters-mapping
+   80:5  warning  Value parameter in mapping _exchangeMonthlyLimit is not named                                                                                                            named-parameters-mapping
+   83:5  warning  Main key parameter in mapping _exchangeCounters is not named                                                                                                             named-parameters-mapping
+   86:5  warning  Main key parameter in mapping _exchangeIDs is not named                                                                                                                  named-parameters-mapping
+   86:5  warning  Value parameter in mapping _exchangeIDs is not named                                                                                                                     named-parameters-mapping
+  129:9  warning  Error message for require is too long: 36 counted / 32 allowed                                                                                                           reason-string
+  129:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  142:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+
+contracts/compliance/legacy/features/MaxBalance.sol
+   65:1   warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   77:5   warning  Main key parameter in mapping IDBalance is not named                                                                                                                     named-parameters-mapping
+   77:5   warning  Value parameter in mapping IDBalance is not named                                                                                                                        named-parameters-mapping
+  121:70  warning  Variable "_value" is unused                                                                                                                                              no-unused-vars
+  122:9   warning  Variable "_idFrom" is unused                                                                                                                                             no-unused-vars
+  123:9   warning  Variable "_idTo" is unused                                                                                                                                               no-unused-vars
+
+contracts/compliance/legacy/features/SupplyLimit.sol
+  65:1  warning  global import of path ../BasicCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  66:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+
+contracts/compliance/legacy/ICompliance.sol
+  65:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/compliance/modular/IModularCompliance.sol
+  65:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/compliance/modular/MCStorage.sol
+  74:5  warning  Main key parameter in mapping _moduleBound is not named  named-parameters-mapping
+  74:5  warning  Value parameter in mapping _moduleBound is not named     named-parameters-mapping
+  82:5  warning  Explicitly mark visibility of state                      state-visibility
+  84:5  warning  Explicitly mark visibility of state                      state-visibility
+
+contracts/compliance/modular/ModularCompliance.sol
+   65:1   warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path ../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                             no-global-import
+   67:1   warning  global import of path ./IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                           no-global-import
+   68:1   warning  global import of path ./MCStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                    no-global-import
+   69:1   warning  global import of path ./modules/IModule.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                              no-global-import
+   70:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                 no-global-import
+   79:9   warning  Error message for require is too long: 68 counted / 32 allowed                                                                                                                                                      reason-string
+   79:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   91:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   92:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  101:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  102:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  103:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  112:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  113:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  114:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  118:13  warning  Error message for require is too long: 52 counted / 32 allowed                                                                                                                                                      reason-string
+  118:13  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  131:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  132:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  150:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  168:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  186:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  199:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  244:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                                                      reason-string
+  244:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/compliance/modular/modules/AbstractModule.sol
+   65:1  warning  global import of path ./IModule.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:5  warning  Main key parameter in mapping _complianceBound is not named                                                                                                     named-parameters-mapping
+   69:5  warning  Value parameter in mapping _complianceBound is not named                                                                                                        named-parameters-mapping
+   75:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+   83:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+   91:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+   92:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+   93:9  warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                  reason-string
+   93:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+  102:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+  103:9  warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                  reason-string
+  103:9  warning  Use Custom Errors instead of require statements                                                                                                                 custom-errors
+
+contracts/compliance/modular/modules/AbstractModuleUpgradeable.sol
+   65:1  warning  global import of path @openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)    no-global-import
+   66:1  warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)    no-global-import
+   67:1  warning  global import of path @openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   68:1  warning  global import of path ./IModule.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                        no-global-import
+   85:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+   94:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+  103:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+  104:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+  105:9  warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                                                        reason-string
+  105:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+  115:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+  116:9  warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                                                        reason-string
+  116:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                       custom-errors
+
+contracts/compliance/modular/modules/ConditionalTransferModule.sol
+   65:1    warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1    warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1    warning  global import of path ../../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   68:1    warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1    warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   76:5    warning  Main key parameter in mapping _transfersApproved is not named                                                                                                                     named-parameters-mapping
+   76:5    warning  Rule is set with explicit type [var/s: uint]                                                                                                                                      explicit-types
+  192:9    warning  Error message for require is too long: 53 counted / 32 allowed                                                                                                                    reason-string
+  192:9    warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  208:31   warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  208:44   warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  226:9    warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                    reason-string
+  226:9    warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  308:9    warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  332:100  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                      explicit-types
+
+contracts/compliance/modular/modules/CountryAllowModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   68:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   72:5   warning  Main key parameter in mapping _allowedCountries is not named                                                                                                                      named-parameters-mapping
+  167:9   warning  Variable "_from" is unused                                                                                                                                                        no-unused-vars
+  168:9   warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  169:9   warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  181:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  181:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+
+contracts/compliance/modular/modules/CountryRestrictModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   68:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   72:5   warning  Main key parameter in mapping _restrictedCountries is not named                                                                                                                   named-parameters-mapping
+  104:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  118:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  133:9   warning  Error message for require is too long: 42 counted / 32 allowed                                                                                                                    reason-string
+  133:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  135:13  warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  151:9   warning  Error message for require is too long: 44 counted / 32 allowed                                                                                                                    reason-string
+  151:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  153:13  warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  165:9   warning  Variable "_from" is unused                                                                                                                                                        no-unused-vars
+  166:9   warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  167:9   warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  179:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  179:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+
+contracts/compliance/modular/modules/ExchangeMonthlyLimitsModule.sol
+   65:1  warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1  warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1  warning  global import of path ../../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   68:1  warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   79:5  warning  Main key parameter in mapping _exchangeMonthlyLimit is not named                                                                                                                  named-parameters-mapping
+   82:5  warning  Main key parameter in mapping _exchangeCounters is not named                                                                                                                      named-parameters-mapping
+   85:5  warning  Main key parameter in mapping _exchangeIDs is not named                                                                                                                           named-parameters-mapping
+   85:5  warning  Value parameter in mapping _exchangeIDs is not named                                                                                                                              named-parameters-mapping
+  179:9  warning  Error message for require is too long: 53 counted / 32 allowed                                                                                                                    reason-string
+  179:9  warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  211:9  warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                    reason-string
+  211:9  warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+
+contracts/compliance/modular/modules/IModule.sol
+  65:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/compliance/modular/modules/MaxBalanceModule.sol
+   65:1   warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                          no-global-import
+   67:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                          no-global-import
+   68:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                    no-global-import
+   69:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                 no-global-import
+   75:5   warning  Main key parameter in mapping _compliancePresetStatus is not named                                                                                                                                                  named-parameters-mapping
+   75:5   warning  Value parameter in mapping _compliancePresetStatus is not named                                                                                                                                                     named-parameters-mapping
+   78:5   warning  Main key parameter in mapping _maxBalance is not named                                                                                                                                                              named-parameters-mapping
+   78:5   warning  Value parameter in mapping _maxBalance is not named                                                                                                                                                                 named-parameters-mapping
+   82:5   warning  Main key parameter in mapping _IDBalance is not named                                                                                                                                                               named-parameters-mapping
+  125:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                                                      reason-string
+  125:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  188:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                                                        explicit-types
+  216:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                                                        explicit-types
+  245:9   warning  Error message for require is too long: 53 counted / 32 allowed                                                                                                                                                      reason-string
+  245:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  267:9   warning  Error message for require is too long: 53 counted / 32 allowed                                                                                                                                                      reason-string
+  267:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  282:9   warning  Error message for require is too long: 53 counted / 32 allowed                                                                                                                                                      reason-string
+  282:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  297:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                                                      reason-string
+  297:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  350:9   warning  Error message for require is too long: 55 counted / 32 allowed                                                                                                                                                      reason-string
+  350:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  367:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/compliance/modular/modules/ModuleProxy.sol
+  65:1  warning  global import of path @openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/compliance/modular/modules/SupplyLimitModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   68:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   72:5   warning  Main key parameter in mapping _supplyLimits is not named                                                                                                                          named-parameters-mapping
+   72:5   warning  Value parameter in mapping _supplyLimits is not named                                                                                                                             named-parameters-mapping
+  114:35  warning  Variable "_from" is unused                                                                                                                                                        no-unused-vars
+  114:50  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  114:63  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  125:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  125:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  142:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                    reason-string
+  142:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+
+contracts/compliance/modular/modules/TimeExchangeLimitsModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ../../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   68:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   89:5   warning  Main key parameter in mapping _limitValues is not named                                                                                                                           named-parameters-mapping
+   92:5   warning  Main key parameter in mapping _exchangeLimits is not named                                                                                                                        named-parameters-mapping
+   95:5   warning  Main key parameter in mapping _exchangeCounters is not named                                                                                                                      named-parameters-mapping
+   99:5   warning  Main key parameter in mapping _exchangeIDs is not named                                                                                                                           named-parameters-mapping
+   99:5   warning  Value parameter in mapping _exchangeIDs is not named                                                                                                                              named-parameters-mapping
+  128:55  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                      explicit-types
+  243:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                    reason-string
+  243:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+
+contracts/compliance/modular/modules/TimeTransfersLimitsModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ../../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   68:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   89:5   warning  Main key parameter in mapping limitValues is not named                                                                                                                            named-parameters-mapping
+   92:5   warning  Main key parameter in mapping transferLimits is not named                                                                                                                         named-parameters-mapping
+   92:5   warning  Value parameter in mapping transferLimits is not named                                                                                                                            named-parameters-mapping
+   95:5   warning  Main key parameter in mapping usersCounters is not named                                                                                                                          named-parameters-mapping
+  105:55  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                      explicit-types
+  162:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  162:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  178:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                    reason-string
+  178:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+
+contracts/compliance/modular/modules/TransferFeesModule.sol
+   65:1   warning  global import of path ../IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   66:1   warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   67:1   warning  global import of path ../../../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   68:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   79:5   warning  Main key parameter in mapping _fees is not named                                                                                                                                  named-parameters-mapping
+   79:5   warning  Value parameter in mapping _fees is not named                                                                                                                                     named-parameters-mapping
+  152:9   warning  Use Custom Errors instead of require statements                                                                                                                                   custom-errors
+  161:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  161:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+
+contracts/compliance/modular/modules/TransferRestrictModule.sol
+   65:1   warning  global import of path ./AbstractModuleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   70:5   warning  Main key parameter in mapping _allowedUserAddresses is not named                                                                                                                  named-parameters-mapping
+  151:35  warning  Variable "_from" is unused                                                                                                                                                        no-unused-vars
+  151:50  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  151:63  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+  162:31  warning  Variable "_to" is unused                                                                                                                                                          no-unused-vars
+  162:44  warning  Variable "_value" is unused                                                                                                                                                       no-unused-vars
+
+contracts/DVD/DVDTransferManager.sol
+   65:1  warning  global import of path ../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1  warning  global import of path ../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   67:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   68:1  warning  global import of path hardhat/console.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   82:5  warning  Main key parameter in mapping token1ToDeliver is not named                                                                                                               named-parameters-mapping
+   82:5  warning  Value parameter in mapping token1ToDeliver is not named                                                                                                                  named-parameters-mapping
+   85:5  warning  Main key parameter in mapping token2ToDeliver is not named                                                                                                               named-parameters-mapping
+   85:5  warning  Value parameter in mapping token2ToDeliver is not named                                                                                                                  named-parameters-mapping
+  177:9  warning  Provide an error message for require                                                                                                                                     reason-string
+  177:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  178:9  warning  Provide an error message for require                                                                                                                                     reason-string
+  178:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  179:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  219:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  222:9  warning  Error message for require is too long: 54 counted / 32 allowed                                                                                                           reason-string
+  222:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  249:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+  250:9  warning  Error message for require is too long: 43 counted / 32 allowed                                                                                                           reason-string
+  250:9  warning  Use Custom Errors instead of require statements                                                                                                                          custom-errors
+
+contracts/factory/ITREXGateway.sol
+  64:1  warning  global import of path ./ITREXFactory.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/factory/TREXFactory.sol
+   64:1   warning  global import of path ../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                                         no-global-import
+   65:1   warning  global import of path ../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                                            no-global-import
+   66:1   warning  global import of path ../registry/interface/IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                 no-global-import
+   67:1   warning  global import of path ../registry/interface/IIdentityRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                    no-global-import
+   68:1   warning  global import of path ../compliance/modular/IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                   no-global-import
+   69:1   warning  global import of path ../registry/interface/ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                              no-global-import
+   70:1   warning  global import of path ../registry/interface/IIdentityRegistryStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                             no-global-import
+   71:1   warning  global import of path ../proxy/authority/ITREXImplementationAuthority.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                            no-global-import
+   72:1   warning  global import of path ../proxy/TokenProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                                        no-global-import
+   73:1   warning  global import of path ../proxy/ClaimTopicsRegistryProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                          no-global-import
+   74:1   warning  global import of path ../proxy/IdentityRegistryProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                             no-global-import
+   75:1   warning  global import of path ../proxy/IdentityRegistryStorageProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                      no-global-import
+   76:1   warning  global import of path ../proxy/TrustedIssuersRegistryProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                       no-global-import
+   77:1   warning  global import of path ../proxy/ModularComplianceProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                            no-global-import
+   78:1   warning  global import of path ./ITREXFactory.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                                                             no-global-import
+   79:1   warning  global import of path onchain-id-custom/contracts/factory/IIdFactory.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                                                             no-global-import
+   89:5   warning  Main key parameter in mapping tokenDeployed is not named                                                                                                                                                                                                                                        named-parameters-mapping
+   89:5   warning  Value parameter in mapping tokenDeployed is not named                                                                                                                                                                                                                                           named-parameters-mapping
+  106:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  107:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  108:9   warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                                                                                                                                  reason-string
+  108:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  109:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  110:17  error    Replace ⏎············(_tokenDetails.irAgents).length·<=·5·&&·(_tokenDetails.tokenAgents).length·<=·5,⏎············"max·5·agents·at·deployment"⏎········ with (_tokenDetails.irAgents).length·<=·5·&&·(_tokenDetails.tokenAgents).length·<=·5,·"max·5·agents·at·deployment"                      prettier/prettier
+  110:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  114:9   warning  Error message for require is too long: 35 counted / 32 allowed                                                                                                                                                                                                                                  reason-string
+  114:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  115:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  176:32  error    Replace ⏎············address(token),⏎············address(ir),⏎············address(irs),⏎············address(tir),⏎············address(ctr),⏎············address(mc),⏎············_salt⏎········ with address(token),·address(ir),·address(irs),·address(tir),·address(ctr),·address(mc),·_salt  prettier/prettier
+  219:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  221:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+  238:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                                                                                                 custom-errors
+
+contracts/factory/TREXGateway.sol
+   64:1  warning  global import of path ./ITREXGateway.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                              no-global-import
+   65:1  warning  global import of path ../roles/AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                          no-global-import
+   66:1  warning  global import of path @openzeppelin/contracts/utils/Strings.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)       no-global-import
+   67:1  warning  global import of path @openzeppelin/contracts/token/ERC20/IERC20.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  119:5  warning  Main key parameter in mapping _deployers is not named                                                                                                                                            named-parameters-mapping
+  119:5  warning  Value parameter in mapping _deployers is not named                                                                                                                                               named-parameters-mapping
+  122:5  warning  Main key parameter in mapping _feeDiscount is not named                                                                                                                                          named-parameters-mapping
+  122:5  warning  Value parameter in mapping _feeDiscount is not named                                                                                                                                             named-parameters-mapping
+
+contracts/onchain-id/ClaimIssuer.sol
+   4:1  warning  global import of path ./interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   5:1  warning  global import of path ./Identity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                no-global-import
+   8:5  warning  Main key parameter in mapping revokedClaims is not named                                                                                                                       named-parameters-mapping
+   8:5  warning  Value parameter in mapping revokedClaims is not named                                                                                                                          named-parameters-mapping
+  17:9  warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  36:9  warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+
+contracts/onchain-id/Identity.sol
+    4:1   warning  global import of path ./interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+    5:1   warning  global import of path ./interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+    6:1   warning  global import of path ./version/Version.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)         no-global-import
+    7:1   warning  global import of path ./storage/Storage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)         no-global-import
+   20:9   warning  Error message for require is too long: 51 counted / 32 allowed                                                                                                                 reason-string
+   20:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+   28:9   warning  Error message for require is too long: 48 counted / 32 allowed                                                                                                                 reason-string
+   28:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+   39:9   warning  Error message for require is too long: 50 counted / 32 allowed                                                                                                                 reason-string
+   39:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+   53:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+   68:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  168:18  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  172:21  warning  Error message for revert is too long: 33 counted / 32 allowed                                                                                                                  reason-string
+  172:21  warning  Use Custom Errors instead of revert statements                                                                                                                                 custom-errors
+  199:9   warning  Error message for require is too long: 39 counted / 32 allowed                                                                                                                 reason-string
+  199:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  200:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  203:13  warning  Error message for require is too long: 35 counted / 32 allowed                                                                                                                 reason-string
+  203:13  warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  205:13  warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  238:9   warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                 reason-string
+  238:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  241:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  246:17  warning  Error message for revert is too long: 42 counted / 32 allowed                                                                                                                  reason-string
+  246:17  warning  Use Custom Errors instead of revert statements                                                                                                                                 custom-errors
+  254:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  255:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  268:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  307:13  warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+  342:13  warning  Error message for revert is too long: 43 counted / 32 allowed                                                                                                                  reason-string
+  342:13  warning  Use Custom Errors instead of revert statements                                                                                                                                 custom-errors
+  345:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  346:9   warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  418:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                   explicit-types
+  502:9   warning  Use Custom Errors instead of require statements                                                                                                                                custom-errors
+
+contracts/onchain-id/interface/IClaimIssuer.sol
+  4:1  warning  global import of path ./IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/onchain-id/interface/IIdentity.sol
+  4:1  warning  global import of path ./IERC734.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  5:1  warning  global import of path ./IERC735.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/onchain-id/storage/Storage.sol
+   3:1  warning  global import of path ./Structs.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  10:5  warning  Main key parameter in mapping _keys is not named                                                                                                                named-parameters-mapping
+  10:5  warning  Value parameter in mapping _keys is not named                                                                                                                   named-parameters-mapping
+  16:5  warning  Main key parameter in mapping _keysByPurpose is not named                                                                                                       named-parameters-mapping
+  16:5  warning  Value parameter in mapping _keysByPurpose is not named                                                                                                          named-parameters-mapping
+  19:5  warning  Main key parameter in mapping _executions is not named                                                                                                          named-parameters-mapping
+  19:5  warning  Value parameter in mapping _executions is not named                                                                                                             named-parameters-mapping
+  22:5  warning  Main key parameter in mapping _claims is not named                                                                                                              named-parameters-mapping
+  22:5  warning  Value parameter in mapping _claims is not named                                                                                                                 named-parameters-mapping
+  25:5  warning  Main key parameter in mapping _claimsByTopic is not named                                                                                                       named-parameters-mapping
+  25:5  warning  Value parameter in mapping _claimsByTopic is not named                                                                                                          named-parameters-mapping
+
+contracts/proxy/AbstractProxy.sol
+  65:1  warning  global import of path ./interface/IProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                             no-global-import
+  66:1  warning  global import of path ./authority/ITREXImplementationAuthority.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                       no-global-import
+  67:1  warning  global import of path @openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  74:9  warning  Error message for require is too long: 45 counted / 32 allowed                                                                                                                                                      reason-string
+  74:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  75:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  76:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/proxy/authority/IAFactory.sol
+  65:1   warning  global import of path ./TREXImplementationAuthority.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  74:5   warning  Main key parameter in mapping _deployedByFactory is not named                                                                                                                       named-parameters-mapping
+  74:5   warning  Value parameter in mapping _deployedByFactory is not named                                                                                                                          named-parameters-mapping
+  87:13  warning  Use Custom Errors instead of revert statements                                                                                                                                      custom-errors
+
+contracts/proxy/authority/TREXImplementationAuthority.sol
+   65:1   warning  global import of path @openzeppelin/contracts/access/Ownable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1   warning  global import of path ./ITREXImplementationAuthority.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)          no-global-import
+   67:1   warning  global import of path ../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                      no-global-import
+   68:1   warning  global import of path ../interface/IProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                     no-global-import
+   69:1   warning  global import of path ../../factory/ITREXFactory.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)              no-global-import
+   70:1   warning  global import of path ./IIAFactory.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                            no-global-import
+   79:5   warning  Main key parameter in mapping _contracts is not named                                                                                                                                        named-parameters-mapping
+   79:5   warning  Value parameter in mapping _contracts is not named                                                                                                                                           named-parameters-mapping
+  115:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  127:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  147:9   warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                               reason-string
+  147:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  149:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  160:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  162:13  warning  Error message for revert is too long: 42 counted / 32 allowed                                                                                                                                reason-string
+  162:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  180:13  warning  Error message for revert is too long: 42 counted / 32 allowed                                                                                                                                reason-string
+  180:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  190:17  warning  Error message for revert is too long: 50 counted / 32 allowed                                                                                                                                reason-string
+  190:17  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  196:17  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  202:17  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  285:9   warning  Error message for require is too long: 40 counted / 32 allowed                                                                                                                               reason-string
+  285:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  287:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  289:9   warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  307:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+  310:13  warning  Error message for revert is too long: 39 counted / 32 allowed                                                                                                                                reason-string
+  310:13  warning  Use Custom Errors instead of revert statements                                                                                                                                               custom-errors
+
+contracts/proxy/ClaimTopicsRegistryProxy.sol
+  65:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  69:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  77:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/proxy/IdentityRegistryProxy.sol
+  65:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  74:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  95:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/proxy/IdentityRegistryStorageProxy.sol
+  65:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  69:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  77:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/proxy/ModularComplianceProxy.sol
+  65:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  69:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  77:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/proxy/TokenProxy.sol
+   65:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   78:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+   82:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+   87:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  105:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/proxy/TrustedIssuersRegistryProxy.sol
+  66:1  warning  global import of path ./AbstractProxy.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  70:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+  78:9  warning  Use Custom Errors instead of require statements                                                                                                                       custom-errors
+
+contracts/registry/implementation/ClaimTopicsRegistry.sol
+  65:1   warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  66:1   warning  global import of path ../storage/CTRStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                          no-global-import
+  67:1   warning  global import of path ../interface/IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                              no-global-import
+  79:9   warning  Error message for require is too long: 34 counted / 32 allowed                                                                                                                                                      reason-string
+  79:9   warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  81:13  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/registry/implementation/IdentityRegistry.sol
+  65:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  66:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+  68:1  warning  global import of path ../interface/IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                   no-global-import
+  69:1  warning  global import of path ../interface/ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                no-global-import
+  70:1  warning  global import of path ../interface/IIdentityRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                      no-global-import
+  71:1  warning  global import of path ../../roles/AgentRoleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                    no-global-import
+  72:1  warning  global import of path ../interface/IIdentityRegistryStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+  73:1  warning  global import of path ../storage/IRStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                no-global-import
+  86:9  warning  Use Custom Errors instead of require statements                                                                                                                                                          custom-errors
+
+contracts/registry/implementation/IdentityRegistryStorage.sol
+   65:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   67:1  warning  global import of path ../../roles/AgentRoleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                 no-global-import
+   68:1  warning  global import of path ../interface/IIdentityRegistryStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)            no-global-import
+   69:1  warning  global import of path ../storage/IRSStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                            no-global-import
+   80:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+   81:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+   91:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+   92:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  102:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  103:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  112:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  113:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  123:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  124:9  warning  Error message for require is too long: 37 counted / 32 allowed                                                                                                                                        reason-string
+  124:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  134:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  135:9  warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+
+contracts/registry/implementation/TrustedIssuersRegistry.sol
+   66:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)             no-global-import
+   67:1  warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   68:1  warning  global import of path ../interface/ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                           no-global-import
+   69:1  warning  global import of path ../storage/TIRStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                          no-global-import
+   80:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   81:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   82:9  warning  Error message for require is too long: 36 counted / 32 allowed                                                                                                                                                      reason-string
+   82:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   83:9  warning  Error message for require is too long: 37 counted / 32 allowed                                                                                                                                                      reason-string
+   83:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   84:9  warning  Error message for require is too long: 40 counted / 32 allowed                                                                                                                                                      reason-string
+   84:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   97:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+   98:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  130:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  131:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  132:9  warning  Error message for require is too long: 37 counted / 32 allowed                                                                                                                                                      reason-string
+  132:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  133:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  181:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/registry/interface/IIdentityRegistry.sol
+  65:1  warning  global import of path ./ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                           no-global-import
+  66:1  warning  global import of path ./IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                              no-global-import
+  67:1  warning  global import of path ./IIdentityRegistryStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                          no-global-import
+  69:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  70:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+
+contracts/registry/interface/IIdentityRegistryStorage.sol
+  65:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/registry/interface/ITrustedIssuersRegistry.sol
+  66:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/registry/storage/IRSStorage.sol
+  66:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  75:5  warning  Main key parameter in mapping _identities is not named                                                                                                                                                named-parameters-mapping
+  75:5  warning  Value parameter in mapping _identities is not named                                                                                                                                                   named-parameters-mapping
+
+contracts/registry/storage/IRStorage.sol
+  66:1  warning  global import of path ../interface/IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+  67:1  warning  global import of path ../interface/ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)   no-global-import
+  68:1  warning  global import of path ../interface/IIdentityRegistryStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/registry/storage/TIRStorage.sol
+  66:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  73:5  warning  Main key parameter in mapping _trustedIssuerClaimTopics is not named                                                                                                                                     named-parameters-mapping
+  73:5  warning  Value parameter in mapping _trustedIssuerClaimTopics is not named                                                                                                                                        named-parameters-mapping
+  76:5  warning  Main key parameter in mapping _claimTopicsToTrustedIssuers is not named                                                                                                                                  named-parameters-mapping
+  76:5  warning  Value parameter in mapping _claimTopicsToTrustedIssuers is not named                                                                                                                                     named-parameters-mapping
+
+contracts/roles/AgentRole.sol
+  66:1  warning  global import of path @openzeppelin/contracts/access/Ownable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ./Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                 no-global-import
+  79:9  warning  Error message for require is too long: 46 counted / 32 allowed                                                                                                                               reason-string
+  79:9  warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  86:9  warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+  92:9  warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+
+contracts/roles/AgentRoleUpgradeable.sol
+  66:1  warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ./Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                        no-global-import
+  79:9  warning  Error message for require is too long: 46 counted / 32 allowed                                                                                                                                                      reason-string
+  79:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  84:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+  90:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/roles/permissioning/agent/AgentRoles.sol
+  66:1  warning  global import of path @openzeppelin/contracts/access/Ownable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ../../Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                             no-global-import
+  91:9  warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+
+contracts/roles/permissioning/agent/AgentRolesUpgradeable.sol
+  66:1  warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ../../Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                    no-global-import
+  91:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/roles/permissioning/owner/OwnerManager.sol
+   66:1  warning  global import of path ../../../token/IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                no-global-import
+   67:1  warning  global import of path ../../../registry/interface/IIdentityRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)        no-global-import
+   68:1  warning  global import of path ../../../registry/interface/ITrustedIssuersRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1  warning  global import of path ../../../registry/interface/IClaimTopicsRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)     no-global-import
+   70:1  warning  global import of path ../../../compliance/legacy/ICompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)               no-global-import
+   71:1  warning  global import of path ./OwnerRoles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                         no-global-import
+   72:1  warning  global import of path ../../AgentRole.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                      no-global-import
+   73:1  warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)      no-global-import
+   74:1  warning  global import of path onchain-id-custom/contracts/interface/IClaimIssuer.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)   no-global-import
+  105:9  warning  Error message for require is too long: 43 counted / 32 allowed                                                                                                                                            reason-string
+  105:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  121:9  warning  Error message for require is too long: 37 counted / 32 allowed                                                                                                                                            reason-string
+  121:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  136:9  warning  Error message for require is too long: 38 counted / 32 allowed                                                                                                                                            reason-string
+  136:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  170:9  warning  Error message for require is too long: 45 counted / 32 allowed                                                                                                                                            reason-string
+  170:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  186:9  warning  Error message for require is too long: 45 counted / 32 allowed                                                                                                                                            reason-string
+  186:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  202:9  warning  Error message for require is too long: 45 counted / 32 allowed                                                                                                                                            reason-string
+  202:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  218:9  warning  Error message for require is too long: 43 counted / 32 allowed                                                                                                                                            reason-string
+  218:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  234:9  warning  Error message for require is too long: 43 counted / 32 allowed                                                                                                                                            reason-string
+  234:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  250:9  warning  Error message for require is too long: 42 counted / 32 allowed                                                                                                                                            reason-string
+  250:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  266:9  warning  Error message for require is too long: 42 counted / 32 allowed                                                                                                                                            reason-string
+  266:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  286:9  warning  Error message for require is too long: 42 counted / 32 allowed                                                                                                                                            reason-string
+  286:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  302:9  warning  Error message for require is too long: 40 counted / 32 allowed                                                                                                                                            reason-string
+  302:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+  318:9  warning  Error message for require is too long: 40 counted / 32 allowed                                                                                                                                            reason-string
+  318:9  warning  Use Custom Errors instead of require statements                                                                                                                                                           custom-errors
+
+contracts/roles/permissioning/owner/OwnerRoles.sol
+  66:1  warning  global import of path @openzeppelin/contracts/access/Ownable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ../../Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                             no-global-import
+  91:9  warning  Use Custom Errors instead of require statements                                                                                                                                              custom-errors
+
+contracts/roles/permissioning/owner/OwnerRolesUpgradeable.sol
+  66:1  warning  global import of path @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ../../Roles.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                                    no-global-import
+  91:9  warning  Use Custom Errors instead of require statements                                                                                                                                                                     custom-errors
+
+contracts/roles/Roles.sol
+  79:9  warning  Use Custom Errors instead of require statements                 custom-errors
+  87:9  warning  Error message for require is too long: 33 counted / 32 allowed  reason-string
+  87:9  warning  Use Custom Errors instead of require statements                 custom-errors
+  96:9  warning  Error message for require is too long: 34 counted / 32 allowed  reason-string
+  96:9  warning  Use Custom Errors instead of require statements                 custom-errors
+
+contracts/token/IERC20.sol
+  6:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+
+contracts/token/IToken.sol
+  66:1  warning  global import of path ../registry/interface/IIdentityRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)   no-global-import
+  67:1  warning  global import of path ../compliance/modular/IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+  68:1  warning  global import of path ./IERC20.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                  no-global-import
+  69:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                            no-global-import
+
+contracts/token/Token.sol
+   66:1   warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                   no-global-import
+   67:1   warning  global import of path ./IToken.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                         no-global-import
+   68:1   warning  global import of path onchain-id-custom/contracts/interface/IIdentity.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   69:1   warning  global import of path ./TokenStorage.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                                   no-global-import
+   70:1   warning  global import of path ../roles/AgentRoleUpgradeable.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                    no-global-import
+   77:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+   83:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  113:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  114:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  115:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  120:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  142:9   warning  Provide an error message for require                                                                                                                                                                  reason-string
+  142:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  158:9   warning  Provide an error message for require                                                                                                                                                                  reason-string
+  158:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  174:9   warning  Provide an error message for require                                                                                                                                                                  reason-string
+  174:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  184:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  193:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  263:9   warning  Provide an error message for require                                                                                                                                                                  reason-string
+  263:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  264:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  283:9   warning  Use Custom Errors instead of revert statements                                                                                                                                                        custom-errors
+  288:9   warning  Variable "_to" is unused                                                                                                                                                                              no-unused-vars
+  427:9   warning  Use Custom Errors instead of revert statements                                                                                                                                                        custom-errors
+  529:9   warning  Provide an error message for require                                                                                                                                                                  reason-string
+  529:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  530:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  545:9   warning  Use Custom Errors instead of revert statements                                                                                                                                                        custom-errors
+  595:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  707:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                                          explicit-types
+  724:9   warning  Error message for require is too long: 37 counted / 32 allowed                                                                                                                                        reason-string
+  724:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  725:9   warning  Error message for require is too long: 35 counted / 32 allowed                                                                                                                                        reason-string
+  725:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  746:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  757:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                                          explicit-types
+  767:9   warning  Error message for require is too long: 33 counted / 32 allowed                                                                                                                                        reason-string
+  767:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  779:14  warning  Rule is set with explicit type [var/s: uint]                                                                                                                                                          explicit-types
+  789:9   warning  Error message for require is too long: 36 counted / 32 allowed                                                                                                                                        reason-string
+  789:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  790:9   warning  Error message for require is too long: 34 counted / 32 allowed                                                                                                                                        reason-string
+  790:9   warning  Use Custom Errors instead of require statements                                                                                                                                                       custom-errors
+  801:63  warning  Variable "_amount" is unused                                                                                                                                                                          no-unused-vars
+
+contracts/token/TokenStorage.sol
+   65:1  warning  global import of path ../compliance/modular/IModularCompliance.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)  no-global-import
+   66:1  warning  global import of path ../registry/interface/IIdentityRegistry.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)   no-global-import
+   67:1  warning  global import of path fhevm/lib/TFHE.sol is not allowed. Specify names to import individually or bind all exports of the module into a name (import "path" as Name)                            no-global-import
+   71:5  warning  Main key parameter in mapping _balances is not named                                                                                                                                           named-parameters-mapping
+   71:5  warning  Value parameter in mapping _balances is not named                                                                                                                                              named-parameters-mapping
+   72:5  warning  Main key parameter in mapping _allowances is not named                                                                                                                                         named-parameters-mapping
+   83:5  warning  Main key parameter in mapping _frozen is not named                                                                                                                                             named-parameters-mapping
+   83:5  warning  Value parameter in mapping _frozen is not named                                                                                                                                                named-parameters-mapping
+   84:5  warning  Main key parameter in mapping _frozenTokens is not named                                                                                                                                       named-parameters-mapping
+   84:5  warning  Value parameter in mapping _frozenTokens is not named                                                                                                                                          named-parameters-mapping
+  101:5  warning  Main key parameter in mapping investors is not named                                                                                                                                           named-parameters-mapping
+  101:5  warning  Value parameter in mapping investors is not named                                                                                                                                              named-parameters-mapping
+
+✖ 649 problems (2 errors, 647 warnings)
+ Solhint found more warnings than the maximum specified (maximum: 25, found: 647)
+ ELIFECYCLE  Command failed with exit code 1.
+ ELIFECYCLE  Command failed with exit code 1.
