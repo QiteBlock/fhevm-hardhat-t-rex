@@ -9,7 +9,9 @@ task("task:deployGateway")
   .setAction(async function (taskArguments: TaskArguments, { ethers }) {
     const deployer = new ethers.Wallet(taskArguments.privateKey).connect(ethers.provider);
     const envConfig2 = dotenv.parse(fs.readFileSync("node_modules/fhevm/lib/.env.kmsverifier"));
-    const gatewayFactory = await ethers.getContractFactory("GatewayContract");
+    const gatewayFactory = await ethers.getContractFactory(
+      "fhevmTemp/fhevm/gateway/GatewayContract.sol:GatewayContract"
+    );
     const Gateway = await gatewayFactory
       .connect(deployer)
       .deploy(taskArguments.ownerAddress, envConfig2.KMS_VERIFIER_CONTRACT_ADDRESS);
@@ -18,7 +20,7 @@ task("task:deployGateway")
     const envConfig = dotenv.parse(fs.readFileSync("node_modules/fhevm/gateway/.env.gateway"));
     if (GatewayContractAddress !== envConfig.GATEWAY_CONTRACT_PREDEPLOY_ADDRESS) {
       throw new Error(
-        `The nonce of the deployer account is not null. Please use another deployer private key or relaunch a clean instance of the fhEVM`,
+        `The nonce of the deployer account is not null. Please use another deployer private key or relaunch a clean instance of the fhEVM`
       );
     }
     console.log("GatewayContract was deployed at address: ", GatewayContractAddress);
@@ -26,8 +28,8 @@ task("task:deployGateway")
 
 task("task:deployACL").setAction(async function (taskArguments: TaskArguments, { ethers }) {
   const deployer = (await ethers.getSigners())[9];
-  const factory = await ethers.getContractFactory("ACL");
   const envConfigExec = dotenv.parse(fs.readFileSync("node_modules/fhevm/lib/.env.exec"));
+  const factory = await ethers.getContractFactory("fhevmTemp/fhevm/lib/ACL.sol:ACL");
   const acl = await factory.connect(deployer).deploy(envConfigExec.TFHE_EXECUTOR_CONTRACT_ADDRESS);
   await acl.waitForDeployment();
   const address = await acl.getAddress();
@@ -40,6 +42,7 @@ task("task:deployACL").setAction(async function (taskArguments: TaskArguments, {
 
 task("task:deployTFHEExecutor").setAction(async function (taskArguments: TaskArguments, { ethers }) {
   const deployer = (await ethers.getSigners())[9];
+  console.log(deployer);
   const factory = await ethers.getContractFactory("TFHEExecutor");
   const exec = await factory.connect(deployer).deploy();
   await exec.waitForDeployment();
@@ -53,7 +56,7 @@ task("task:deployTFHEExecutor").setAction(async function (taskArguments: TaskArg
 
 task("task:deployKMSVerifier").setAction(async function (taskArguments: TaskArguments, { ethers }) {
   const deployer = (await ethers.getSigners())[9];
-  const factory = await ethers.getContractFactory("KMSVerifier");
+  const factory = await ethers.getContractFactory("fhevmTemp/fhevm/lib/KMSVerifier.sol:KMSVerifier");
   const exec = await factory.connect(deployer).deploy();
   await exec.waitForDeployment();
   const address = await exec.getAddress();

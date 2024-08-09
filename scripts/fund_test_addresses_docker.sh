@@ -13,3 +13,13 @@ sleep 8
 docker exec -i zama-dev-fhevm-validator-1 faucet c45994e4098271c3140117ebD5c74C70dd56D9cd
 sleep 8
 docker exec -i zama-dev-fhevm-validator-1 faucet 97F272ccfef4026A1F3f0e0E879d514627B84E69
+sleep 8
+docker exec -i zama-dev-fhevm-validator-1 faucet 8B8f5091f8b9817EF69cFC1E8B2f721BafF60DF4
+sleep 8
+docker exec -i zama-dev-fhevm-validator-1 faucet 03734276e8f8ab253ff4295e66228DAC936FF5b8
+sleep 8
+docker exec -i zama-dev-fhevm-validator-1 faucet 9FE8958A2920985AC7ab8d320fDFaB310135a05B
+sleep 8
+docker exec -i zama-dev-fhevm-validator-1 faucet 466f26442DD182C9A1b018Cd06671F9791DdE8Ef
+sleep 8
+docker exec -i zama-dev-fhevm-validator-1 faucet c45994e4098271c3140117ebD5c74C70dd56D9cd

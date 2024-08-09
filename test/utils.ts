@@ -1,13 +1,11 @@
 import { toBufferLE } from "bigint-buffer";
 import { ContractMethodArgs, Typed } from "ethers";
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
 
-import type { Counter } from "../types";
 import { TypedContractMethod } from "../types/common";
-import { getSigners } from "./signers";
 
 export const waitForBlock = (blockNumber: bigint | number) => {
-  if (process.env.HARDHAT_NETWORK === "hardhat") {
+  if (network.name === "hardhat") {
     return new Promise((resolve, reject) => {
       const intervalId = setInterval(async () => {
         try {
@@ -39,7 +37,7 @@ export const waitForBlock = (blockNumber: bigint | number) => {
 
 export const waitNBlocks = async (Nblocks: number) => {
   const currentBlock = await ethers.provider.getBlockNumber();
-  if (process.env.HARDHAT_NETWORK === "hardhat") {
+  if (network.name === "hardhat") {
     await produceDummyTransactions(Nblocks);
   }
   await waitForBlock(currentBlock + Nblocks);
@@ -73,24 +71,19 @@ export const createTransaction = async <A extends [...{ [I in keyof A]-?: A[I] |
 };
 
 export const produceDummyTransactions = async (blockCount: number) => {
-  const contract = await deployCounterContract();
   let counter = blockCount;
-  while (counter > 0) {
+  while (counter >= 0) {
     counter--;
-    const tx = await contract.increment();
-    const _ = await tx.wait();
+    const [signer] = await ethers.getSigners();
+    const nullAddress = "0x0000000000000000000000000000000000000000";
+    const tx = {
+      to: nullAddress,
+      value: 0n,
+    };
+    const receipt = await signer.sendTransaction(tx);
+    await receipt.wait();
   }
 };
-
-async function deployCounterContract(): Promise<Counter> {
-  const signers = await getSigners();
-
-  const contractFactory = await ethers.getContractFactory("Counter");
-  const contract = await contractFactory.connect(signers.dave).deploy();
-  await contract.waitForDeployment();
-
-  return contract;
-}
 
 export const mineNBlocks = async (n: number) => {
   for (let index = 0; index < n; index++) {
