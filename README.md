@@ -124,7 +124,7 @@ Before getting started, ensure you have the following installed:
 ## WARNING ! Read that before executing anything !
 
 - In this project, i used the latest fhevm hardhat template. Please note that i need to modify the scripts in order to make it works. In the task `taskDeploy`, i get error that ethers cannot find the contract in this location : `await ethers.getContractFactory("fhevm/...");`. I modify it to `await ethers.getContractFactory("fhevmTemp/...");` in order to be able to use the mock mode. 
-- And for real test mode, i need to modify it to `await ethers.getContractFactory("fhevmTemp/fhevm/...");`
+- And for local node test mode, i need to modify it to `await ethers.getContractFactory("fhevmTemp/fhevm/...");`
 - Total supply is set to a cypher because in mint function we need to verify the eligibility of the transfer. So it needs to be a cypher because other values are. I know that maintaining a list of investors make the token not scalable as there will be more and more investors and the `allowEachInvestorToAccessTotalSupply` will be more and more expensive. It can even make the transaction failed because of the max amount of gas in a block. This is a problem that need to be considered, however we have the function `removeInvestor` to remove useless investors from the list and for a security token as the T-REX one. We will not have that many investors. So normally it should be ok. 
 
 ## Mock mode
@@ -164,7 +164,7 @@ pnpm coverage:mock
 ![Compliance Coverage](./screenshots/compliance_coverage.png)
 ![Registry Coverage](./screenshots/registry_coverage.png)
 
-## Real mode
+## Local node mode
 
 ### 1. Clone the Repository
 
