@@ -28,16 +28,22 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
   // Deploy implementations
   const claimTopicsRegistryImplementation = await ethers.deployContract("ClaimTopicsRegistry", signers.deployer);
   await claimTopicsRegistryImplementation.waitForDeployment();
+  console.log("ClaimTopicsRegistry: " + (await claimTopicsRegistryImplementation.getAddress()));
   const trustedIssuersRegistryImplementation = await ethers.deployContract("TrustedIssuersRegistry", signers.deployer);
   await trustedIssuersRegistryImplementation.waitForDeployment();
+  console.log("TrustedIssuersRegistry: " + (await trustedIssuersRegistryImplementation.getAddress()));
   const identityRegistryStorageImplementation = await ethers.deployContract("IdentityRegistryStorage", signers.deployer);
   await identityRegistryStorageImplementation.waitForDeployment();
+  console.log("IdentityRegistryStorage: " + (await identityRegistryStorageImplementation.getAddress()));
   const identityRegistryImplementation = await ethers.deployContract("IdentityRegistry", signers.deployer);
   await identityRegistryImplementation.waitForDeployment();
+  console.log("IdentityRegistry: " + (await identityRegistryImplementation.getAddress()));
   const modularComplianceImplementation = await ethers.deployContract("ModularCompliance", signers.deployer);
   await modularComplianceImplementation.waitForDeployment();
+  console.log("ModularCompliance: " + (await modularComplianceImplementation.getAddress()));
   const tokenImplementation = await ethers.deployContract("Token", signers.deployer);
   await tokenImplementation.waitForDeployment();
+  console.log("Token: " + (await tokenImplementation.getAddress()));
   const identityImplementation = await new ethers.ContractFactory(
     OnchainID.contracts.Identity.abi,
     OnchainID.contracts.Identity.bytecode,
@@ -51,6 +57,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
     signers.deployer
   ).deploy(identityImplementationAddress);
   await identityImplementationAuthority.waitForDeployment();
+  console.log("identityImplementationAuthority: " + (await identityImplementationAuthority.getAddress()));
 
   const identityImplementationAuthorityAddress = await identityImplementationAuthority.getAddress();
   const identityFactory = await new ethers.ContractFactory(
@@ -66,6 +73,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
     signers.deployer
   );
   await trexImplementationAuthority.waitForDeployment();
+  console.log("TREXImplementationAuthority: " + (await trexImplementationAuthority.getAddress()));
   const versionStruct = {
     major: 4,
     minor: 0,
@@ -88,22 +96,26 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
     signers.deployer
   );
   await trexFactory.waitForDeployment();
+  console.log("TREXFactory: " + (await trexFactory.getAddress()));
   await identityFactory.connect(signers.deployer).addTokenFactory(await trexFactory.getAddress());
 
   const claimTopicsRegistry = await ethers
     .deployContract("ClaimTopicsRegistryProxy", [trexImplementationAuthorityAddress], signers.deployer)
     .then(async (proxy) => ethers.getContractAt("ClaimTopicsRegistry", await proxy.getAddress()));
   await claimTopicsRegistry.waitForDeployment();
+  console.log("ClaimTopicsRegistryProxy: " + (await claimTopicsRegistry.getAddress()));
 
   const trustedIssuersRegistry = await ethers
     .deployContract("TrustedIssuersRegistryProxy", [trexImplementationAuthorityAddress], signers.deployer)
     .then(async (proxy) => ethers.getContractAt("TrustedIssuersRegistry", await proxy.getAddress()));
   await trustedIssuersRegistry.waitForDeployment();
+  console.log("TrustedIssuersRegistryProxy: " + (await trustedIssuersRegistry.getAddress()));
 
   const identityRegistryStorage = await ethers
     .deployContract("IdentityRegistryStorageProxy", [trexImplementationAuthorityAddress], signers.deployer)
     .then(async (proxy) => ethers.getContractAt("IdentityRegistryStorage", await proxy.getAddress()));
   await identityRegistryStorage.waitForDeployment();
+  console.log("IdentityRegistryStorageProxy: " + (await identityRegistryStorage.getAddress()));
 
   const defaultCompliance = await ethers.deployContract("DefaultCompliance", signers.deployer);
   await defaultCompliance.waitForDeployment();
@@ -121,6 +133,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
     )
     .then(async (proxy) => ethers.getContractAt("IdentityRegistry", await proxy.getAddress()));
   await identityRegistry.waitForDeployment();
+  console.log("IdentityRegistry: " + (await identityRegistry.getAddress()));
 
   const tokenOID = await deployIdentityProxy(
     ethers,
@@ -143,6 +156,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
     signers.deployer
   );
   const tokenAddress = await token.getAddress();
+  console.log("Token: " + tokenAddress);
 
   await identityRegistryStorage.connect(signers.deployer).bindIdentityRegistry(identityRegistryAddress);
 
@@ -153,6 +167,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
 
   const claimIssuerContract = await ethers.deployContract("ClaimIssuer", [signers.claimIssuer.address], signers.claimIssuer);
   await claimIssuerContract.waitForDeployment();
+  console.log("ClaimIssuer: " + await claimIssuerContract.getAddress());
   const AbiCoder = new ethers.AbiCoder();
   await claimIssuerContract
     .connect(signers.claimIssuer)

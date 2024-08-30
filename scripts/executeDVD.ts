@@ -50,7 +50,7 @@ async function executeDVD() {
       encryptedTransferAmount.inputProof
     );
   await tx.wait();
-  const balanceAliceTokenBHandle = await tokenA.balanceOf(signers.aliceWallet.address);
+  const balanceAliceTokenBHandle = await tokenA.connect(signers.aliceWallet).balanceOf(signers.aliceWallet.address);
   const balanceAliceTokenB = await decrypt64(balanceAliceTokenBHandle);
   console.log("BEFORE DVD: Alice Balance of token " + tokenAName + " : " + balanceAliceTokenB);
   // Mint 1000 tokenB to Bob
@@ -65,7 +65,7 @@ async function executeDVD() {
       encryptedTransferAmount2.inputProof
     );
   await tx2.wait();
-  const balanceBobTokenBHandle = await tokenB.balanceOf(signers.bobWallet.address);
+  const balanceBobTokenBHandle = await tokenB.connect(signers.bobWallet).balanceOf(signers.bobWallet.address);
   const balanceBobTokenB = await decrypt64(balanceBobTokenBHandle);
   console.log("BEFORE DVD: Bob Balance of token " + tokenBName + " : " + balanceBobTokenB);
   console.log("---------------------------INITIATE DVD---------------------------");

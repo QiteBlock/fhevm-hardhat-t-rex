@@ -32,20 +32,26 @@ export const createInstances = async (accounts: Signers): Promise<FhevmInstances
         instances[k as keyof FhevmInstances] = await createInstanceMocked();
       })
     );
+  } else if (network.name === "zama") {
+    await Promise.all(
+      Object.keys(accounts).map(async (k) => {
+        instances[k as keyof FhevmInstances] = await createInstance("https://gateway.devnet.zama.ai");
+      })
+    );
   } else {
     await Promise.all(
       Object.keys(accounts).map(async (k) => {
-        instances[k as keyof FhevmInstances] = await createInstance();
+        instances[k as keyof FhevmInstances] = await createInstance("http://localhost:7077");
       })
     );
   }
   return instances;
 };
 
-export const createInstance = async () => {
+export const createInstance = async (gatewayUrl) => {
   const instance = await createFhevmInstance({
     networkUrl: network.config.url,
-    gatewayUrl: "http://localhost:7077",
+    gatewayUrl: gatewayUrl,
   });
   return instance;
 };
