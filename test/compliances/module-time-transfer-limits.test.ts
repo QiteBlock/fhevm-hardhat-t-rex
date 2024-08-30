@@ -657,7 +657,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
 
     describe("when value does not exceed the time limit", () => {
       describe("when value exceeds the counter limit", () => {
-        it("should return false", async () => {
+        it("should not transfer tokens", async () => {
           const snapshotId = await ethers.provider.send("evm_snapshot");
           const context = globalContext;
           const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
@@ -704,6 +704,8 @@ describe("Compliance Module: TimeTransferLimits", () => {
               encryptedTransferAmount1.inputProof
             );
           await tx1.wait();
+          // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
+          // So if the comparison failed then we will transfer 0 token that's why we verified that the amount is equal to the start balance.
           const balanceHandle = await context.suite.token.balanceOf(context.accounts.signers.bobWallet);
           const balance = await decrypt64(balanceHandle);
           expect(balance).to.equal(600);

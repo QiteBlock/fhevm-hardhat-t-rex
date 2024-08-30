@@ -57,6 +57,7 @@ describe("TREXFactory", () => {
       },
     };
   });
+  
   describe(".deployTREXSuite()", () => {
     describe("when called by not owner", () => {
       it("should revert", async () => {

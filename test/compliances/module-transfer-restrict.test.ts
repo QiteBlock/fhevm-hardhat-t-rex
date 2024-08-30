@@ -313,7 +313,7 @@ describe("Compliance Module: TransferRestrict", () => {
 
   describe(".moduleCheck", () => {
     describe("when sender and receiver are not allowed", () => {
-      it("should return false", async () => {
+      it("should not transfer tokens", async () => {
         const context = globalContext;
         const to = context.accounts.signers.bobWallet.address;
         const inputAlice = instances.aliceWallet.createEncryptedInput(
@@ -327,6 +327,8 @@ describe("Compliance Module: TransferRestrict", () => {
           ["transfer(address,bytes32,bytes)"](to, encryptedTransferAmount.handles[0], encryptedTransferAmount.inputProof);
         await tx.wait();
 
+        // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
+        // So if the comparison failed then we will transfer 0 token that's why we verified that the amount is equal to the start balance.
         const balanceHandle = await context.suite.token.balanceOf(context.accounts.signers.aliceWallet);
         const balance = await decrypt64(balanceHandle);
         expect(balance).to.equal(1000);

@@ -215,7 +215,7 @@ describe("Compliance Module: SupplyLimit", () => {
 
   describe(".moduleCheck", () => {
     describe("when value exceeds compliance supply limit", () => {
-      it("should return false", async () => {
+      it("should not mint new tokens", async () => {
         const context = globalContext;
         const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
           await context.suite.token.getAddress(),
@@ -245,6 +245,8 @@ describe("Compliance Module: SupplyLimit", () => {
           ["mint(address,bytes32,bytes)"](to, encryptedMintAmount.handles[0], encryptedMintAmount.inputProof);
         await tx.wait();
 
+        // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
+        // So if the comparison failed then we will transfer 0 token that's why we verified that the amount is equal to the start balance.
         const balanceHandle = await context.suite.token.balanceOf(signers.aliceWallet);
         const balance = await decrypt64(balanceHandle);
         expect(balance).to.equal(1000);

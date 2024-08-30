@@ -16,10 +16,12 @@ describe("DVDTransferManager", () => {
     await initSigners();
     signers = await getSigners();
 
+    // Need to deploy the two T-REX suite token to able to test
     const context = await deployFullSuiteFixture(ethers, signers, "TREXA", "TREXA");
     const contextB = await deployFullSuiteFixture(ethers, signers, "TREXB", "TREXB");
     instances = await createInstances(signers);
 
+    // Mint some token for Alice on the tokenA
     const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
       await context.suite.token.getAddress(),
       signers.tokenAgent.address
@@ -35,6 +37,7 @@ describe("DVDTransferManager", () => {
       );
     await tx.wait();
 
+    // Mint some token for Bob on the tokenA
     const inputTokenAgent2 = instances.tokenAgent.createEncryptedInput(
       await context.suite.token.getAddress(),
       signers.tokenAgent.address
@@ -74,6 +77,7 @@ describe("DVDTransferManager", () => {
       it("should store an initiated transfer", async () => {
         const { contextTokenA, contextTokenB, transferManager } = globalContext;
 
+        // Need to approve the DvD contract to be able to transfer token from Alice
         const inputAlice = instances.aliceWallet.createEncryptedInput(
           await contextTokenA.suite.token.getAddress(),
           contextTokenA.accounts.signers.aliceWallet.address
@@ -89,6 +93,7 @@ describe("DVDTransferManager", () => {
           );
         await tx1.wait();
 
+        // When calling the DvD Contract to initiate DvD Transfer Alice need to create encrypted input for the amount
         const inputAlice1 = instances.aliceWallet.createEncryptedInput(
           await contextTokenA.suite.token.getAddress(),
           contextTokenA.accounts.signers.aliceWallet.address
@@ -101,6 +106,7 @@ describe("DVDTransferManager", () => {
         );
         inputBob.add64(500);
         const encryptedInitTransfer2 = inputBob.encrypt();
+        // Call initiate transfer (There is no transfer for now)
         const tx2 = await transferManager
           .connect(contextTokenA.accounts.signers.aliceWallet)
           .initiateDVDTransfer(
@@ -123,6 +129,7 @@ describe("DVDTransferManager", () => {
       it("should execute the transfer", async () => {
         const { transferManager, contextTokenA, contextTokenB } = globalContext;
 
+        // Mint some tokenB for Bob
         const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
           await contextTokenB.suite.token.getAddress(),
           contextTokenB.accounts.signers.tokenAgent.address
@@ -138,6 +145,7 @@ describe("DVDTransferManager", () => {
           );
         await tx1.wait();
 
+        // Same Bob need to approve the DvD contract to use his token
         const inputBob = instances.bobWallet.createEncryptedInput(
           await contextTokenB.suite.token.getAddress(),
           contextTokenB.accounts.signers.bobWallet.address
@@ -153,23 +161,28 @@ describe("DVDTransferManager", () => {
           );
         await tx2.wait();
 
+        // Execute the DvD
         const tx = await transferManager.connect(contextTokenA.accounts.signers.bobWallet).takeDVDTransfer(transferId);
         await expect(tx).to.emit(transferManager, "DVDTransferExecuted").withArgs(transferId);
 
+        // Verify the final balance of Bob and Alice
         const balanceFinalBobTokenAHandle = await contextTokenA.suite.token.balanceOf(
           contextTokenA.accounts.signers.bobWallet.address
         );
         const balanceFinalBobTokenA = await decrypt64(balanceFinalBobTokenAHandle);
+        // Bob has 1500 tokenA because, initially he has 500 and Alice transfer 1000 to him
         expect(balanceFinalBobTokenA).to.be.eq(1500);
         const balanceFinalBobTokenBHandle = await contextTokenB.suite.token.balanceOf(
           contextTokenB.accounts.signers.bobWallet.address
         );
         const balanceFinalBobTokenB = await decrypt64(balanceFinalBobTokenBHandle);
+        // Bob has 0 tokenB because he transfer all to Alice
         expect(balanceFinalBobTokenB).to.be.eq(0);
         const balanceFinalAliceTokenBHandle = await contextTokenB.suite.token.balanceOf(
           contextTokenB.accounts.signers.aliceWallet.address
         );
         const balanceFinalAliceTokenB = await decrypt64(balanceFinalAliceTokenBHandle);
+        // Alice has 500 tokenB because Bob transfer 500 tokenB to Alice
         expect(balanceFinalAliceTokenB).to.be.eq(500);
       });
     });

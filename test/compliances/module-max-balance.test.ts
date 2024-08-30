@@ -337,7 +337,7 @@ describe("Compliance Module: MaxBalance", () => {
 
     describe("when calling via compliance", () => {
       describe("when value exceeds the max balance", () => {
-        it("should revert", async () => {
+        it("should not mint token", async () => {
           const context = globalContext;
 
           const inputDeployer = instances.deployer.createEncryptedInput(
@@ -353,6 +353,8 @@ describe("Compliance Module: MaxBalance", () => {
             ]),
             await context.suite.complianceModule.getAddress()
           );
+          // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
+          // So if the comparison failed then we will transfer 0 token that's why we verified that the amount is 0 at the end.
           const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
             await context.suite.token.getAddress(),
             signers.tokenAgent.address
@@ -459,7 +461,7 @@ describe("Compliance Module: MaxBalance", () => {
       });
 
       describe("when value exceeds the max balance", () => {
-        it("should revert", async () => {
+        it("should not transfer any tokens", async () => {
           const context = globalContext;
 
           const inputTokenAgent = instances.tokenAgent.createEncryptedInput(
@@ -491,6 +493,8 @@ describe("Compliance Module: MaxBalance", () => {
               encryptedTransferAmount.inputProof
             );
           await tx.wait();
+          // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
+          // So if the comparison failed then we will transfer 0 token that's why we verified that the amount is equal to the start balance.
           const balanceHandle = await context.suite.token.balanceOf(signers.aliceWallet);
           const balance = await decrypt64(balanceHandle);
           expect(balance).to.equal(100);
