@@ -314,6 +314,10 @@ pnpm script:executeDVD
 
 - Transfer Manager Address : 0x3Bfd30061ba098da2077f3583b3a6bBDf9d89f1f
 
+#### Result in Devnet
+
+![Tests](./screenshots/devnet_result.png)
+
 ### 7. License
 
 This project is licensed under the GPL-3.0 License. See the LICENSE file for details.

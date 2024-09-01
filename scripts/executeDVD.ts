@@ -1,6 +1,7 @@
+import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 import { ethers } from "hardhat";
 
-import { createInstances, decrypt64 } from "../test/instance";
+import { createInstances } from "../test/instance";
 import { FhevmInstances } from "../test/types";
 
 async function executeDVD() {
@@ -28,6 +29,9 @@ async function executeDVD() {
   }
 
   const instances: FhevmInstances = await createInstances(signers);
+  // Define private public key
+  const { publicKey: publicKeyAlice, privateKey: privateKeyAlice } = instances.aliceWallet.generateKeypair();
+  const { publicKey: publicKeyBob, privateKey: privateKeyBob } = instances.bobWallet.generateKeypair();
   // Define contracts
   const tokenFactory = await ethers.getContractFactory("Token");
   const transferManagerFactory = await ethers.getContractFactory("DVDTransferManager");
@@ -51,7 +55,14 @@ async function executeDVD() {
     );
   await tx.wait();
   const balanceAliceTokenBHandle = await tokenA.connect(signers.aliceWallet).balanceOf(signers.aliceWallet.address);
-  const balanceAliceTokenB = await decrypt64(balanceAliceTokenBHandle);
+  const balanceAliceTokenB = await decryptCypher(
+    publicKeyAlice,
+    privateKeyAlice,
+    instances.aliceWallet,
+    tokenAAddress,
+    signers.aliceWallet,
+    balanceAliceTokenBHandle
+  );
   console.log("BEFORE DVD: Alice Balance of token " + tokenAName + " : " + balanceAliceTokenB);
   // Mint 1000 tokenB to Bob
   const inputTokenAgent2 = instances.tokenAgent.createEncryptedInput(await tokenB.getAddress(), signers.tokenAgent.address);
@@ -66,7 +77,14 @@ async function executeDVD() {
     );
   await tx2.wait();
   const balanceBobTokenBHandle = await tokenB.connect(signers.bobWallet).balanceOf(signers.bobWallet.address);
-  const balanceBobTokenB = await decrypt64(balanceBobTokenBHandle);
+  const balanceBobTokenB = await decryptCypher(
+    publicKeyBob,
+    privateKeyBob,
+    instances.bobWallet,
+    tokenBAddress,
+    signers.bobWallet,
+    balanceBobTokenBHandle
+  );
   console.log("BEFORE DVD: Bob Balance of token " + tokenBName + " : " + balanceBobTokenB);
   console.log("---------------------------INITIATE DVD---------------------------");
   // Initalize the transfer
@@ -77,16 +95,44 @@ async function executeDVD() {
   // Final balance of both parties
   console.log("---------------------------RESULTS---------------------------");
   const balanceFinalBobTokenAHandle = await tokenA.balanceOf(signers.bobWallet.address);
-  const balanceFinalBobTokenA = await decrypt64(balanceFinalBobTokenAHandle);
+  const balanceFinalBobTokenA = await decryptCypher(
+    publicKeyBob,
+    privateKeyBob,
+    instances.bobWallet,
+    tokenAAddress,
+    signers.bobWallet,
+    balanceFinalBobTokenAHandle
+  );
   console.log("AFTER DVD: Bob Balance of token " + tokenAName + ": " + balanceFinalBobTokenA);
   const balanceFinalBobTokenBHandle = await tokenB.balanceOf(signers.bobWallet.address);
-  const balanceFinalBobTokenB = await decrypt64(balanceFinalBobTokenBHandle);
+  const balanceFinalBobTokenB = await decryptCypher(
+    publicKeyBob,
+    privateKeyBob,
+    instances.bobWallet,
+    tokenBAddress,
+    signers.bobWallet,
+    balanceFinalBobTokenBHandle
+  );
   console.log("AFTER DVD: Bob Balance of token " + tokenBName + ": " + balanceFinalBobTokenB);
   const balanceFinalAliceTokenAHandle = await tokenA.balanceOf(signers.aliceWallet.address);
-  const balanceFinalAliceTokenA = await decrypt64(balanceFinalAliceTokenAHandle);
+  const balanceFinalAliceTokenA = await decryptCypher(
+    publicKeyAlice,
+    privateKeyAlice,
+    instances.aliceWallet,
+    tokenAAddress,
+    signers.aliceWallet,
+    balanceFinalAliceTokenAHandle
+  );
   console.log("AFTER DVD: Alice Balance of token " + tokenAName + ": " + balanceFinalAliceTokenA);
   const balanceFinalAliceTokenBHandle = await tokenB.balanceOf(signers.aliceWallet.address);
-  const balanceFinalAliceTokenB = await decrypt64(balanceFinalAliceTokenBHandle);
+  const balanceFinalAliceTokenB = await decryptCypher(
+    publicKeyAlice,
+    privateKeyAlice,
+    instances.aliceWallet,
+    tokenBAddress,
+    signers.aliceWallet,
+    balanceFinalAliceTokenBHandle
+  );
   console.log("AFTER DVD: Alice Balance of token " + tokenBName + ": " + balanceFinalAliceTokenB);
 }
 
@@ -142,6 +188,26 @@ async function executeTransfer(instances: FhevmInstances, tokenB: any, signers: 
   // Execute the transfer
   const tx = await transferManager.connect(signers.bobWallet).takeDVDTransfer(transferId);
   await tx.wait();
+}
+
+async function decryptCypher(
+  publicKey: string,
+  privateKey: string,
+  instance: FhevmInstances,
+  contractAddress: string,
+  signer: HardhatEthersSigner,
+  balanceHandle: any
+) {
+  const eip712 = instance.createEIP712(publicKey, contractAddress);
+  const signature = await signer.signTypedData(eip712.domain, { Reencrypt: eip712.types.Reencrypt }, eip712.message);
+  return await instance.reencrypt(
+    balanceHandle,
+    privateKey,
+    publicKey,
+    signature.replace("0x", ""),
+    contractAddress,
+    signer.address
+  );
 }
 
 executeDVD().catch((error) => console.log(error));
