@@ -226,7 +226,7 @@ pnpm script:executeDVD
 ## Dev network 
 
 
-### 1. Deployment with my account (Get some Zama token)
+### 1. Deployment with my account (Get some Zama token from the faucet)
 
 #### T-Rex token A
 
