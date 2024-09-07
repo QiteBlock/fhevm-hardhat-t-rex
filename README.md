@@ -1,4 +1,4 @@
-# T-Rex Token Protocol - Enhanced Privacy Edition
+# FH-EVM T-Rex Token Protocol - Enhanced Privacy Edition
 
 ## Overview
 
