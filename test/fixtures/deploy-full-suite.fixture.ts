@@ -167,7 +167,7 @@ export async function deployFullSuiteFixture(ethers: any, signers: Signers, name
 
   const claimIssuerContract = await ethers.deployContract("ClaimIssuer", [signers.claimIssuer.address], signers.claimIssuer);
   await claimIssuerContract.waitForDeployment();
-  console.log("ClaimIssuer: " + await claimIssuerContract.getAddress());
+  console.log("ClaimIssuer: " + (await claimIssuerContract.getAddress()));
   const AbiCoder = new ethers.AbiCoder();
   await claimIssuerContract
     .connect(signers.claimIssuer)

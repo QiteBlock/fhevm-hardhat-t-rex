@@ -941,11 +941,7 @@ describe("Token - Transfers", () => {
         await t1.wait();
         const tx = await token
           .connect(signers.tokenAgent)
-          ["burn(address,bytes32,bytes)"](
-            signers.aliceWallet.address,
-            encryptedAmount.handles[1],
-            encryptedAmount.inputProof
-          );
+          ["burn(address,bytes32,bytes)"](signers.aliceWallet.address, encryptedAmount.handles[1], encryptedAmount.inputProof);
         await tx.wait();
 
         const balanceFrozen = await token.getFrozenTokens(signers.aliceWallet.address);

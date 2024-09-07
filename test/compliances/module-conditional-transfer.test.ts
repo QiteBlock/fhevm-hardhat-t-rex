@@ -311,14 +311,15 @@ describe("ConditionalTransferModule", () => {
         const tx = await compliance
           .connect(signers.deployer)
           .callModuleFunction(
-            new ethers.Interface([
-              "function batchUnApproveTransfers(address[], address[], bytes32[], bytes)",
-            ]).encodeFunctionData("batchUnApproveTransfers", [
-              [signers.aliceWallet.address],
-              [signers.bobWallet.address],
-              [encryptedTransferAmount.handles[0]],
-              encryptedTransferAmount.inputProof,
-            ]),
+            new ethers.Interface(["function batchUnApproveTransfers(address[], address[], bytes32[], bytes)"]).encodeFunctionData(
+              "batchUnApproveTransfers",
+              [
+                [signers.aliceWallet.address],
+                [signers.bobWallet.address],
+                [encryptedTransferAmount.handles[0]],
+                encryptedTransferAmount.inputProof,
+              ]
+            ),
             await conditionalTransferModule.getAddress()
           );
 
@@ -433,14 +434,15 @@ describe("ConditionalTransferModule", () => {
           await compliance
             .connect(signers.deployer)
             .callModuleFunction(
-              new ethers.Interface([
-                "function batchApproveTransfers(address[], address[], bytes32[], bytes)",
-              ]).encodeFunctionData("batchApproveTransfers", [
-                [signers.aliceWallet.address],
-                [signers.bobWallet.address],
-                [encryptedTransferAmount.handles[0]],
-                encryptedTransferAmount.inputProof,
-              ]),
+              new ethers.Interface(["function batchApproveTransfers(address[], address[], bytes32[], bytes)"]).encodeFunctionData(
+                "batchApproveTransfers",
+                [
+                  [signers.aliceWallet.address],
+                  [signers.bobWallet.address],
+                  [encryptedTransferAmount.handles[0]],
+                  encryptedTransferAmount.inputProof,
+                ]
+              ),
               await conditionalTransferModule.getAddress()
             );
 
