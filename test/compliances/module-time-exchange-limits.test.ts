@@ -246,7 +246,7 @@ describe("Compliance Module: TimeExchangeLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.tokenAgent.address
           );
-          inputTokenAgent.add64(90);
+          inputTokenAgent.add64(90).add64(100);
           const encryptedMaxAmount = inputTokenAgent.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setExchangeLimit(address,uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -256,16 +256,10 @@ describe("Compliance Module: TimeExchangeLimits", () => {
             await context.suite.complianceModule.getAddress()
           );
 
-          const inputTokenAgent1 = instances.tokenAgent.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.tokenAgent.address
-          );
-          inputTokenAgent1.add64(100);
-          const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
           const tx = await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setExchangeLimit(address,uint32,bytes32,bytes)"]).encodeFunctionData(
               "setExchangeLimit",
-              [exchangeID, 1, encryptedMaxAmount1.handles[0], encryptedMaxAmount1.inputProof]
+              [exchangeID, 1, encryptedMaxAmount.handles[1], encryptedMaxAmount.inputProof]
             ),
             await context.suite.complianceModule.getAddress()
           );
@@ -463,7 +457,7 @@ describe("Compliance Module: TimeExchangeLimits", () => {
                 await context.suite.token.getAddress(),
                 context.accounts.signers.tokenAgent.address
               );
-              inputTokenAgent.add64(100);
+              inputTokenAgent.add64(100).add64(10);
               const encryptedMaxAmount = inputTokenAgent.encrypt();
               await context.suite.compliance.callModuleFunction(
                 new ethers.Interface(["function setExchangeLimit(address,uint32,bytes32,bytes)"]).encodeFunctionData(

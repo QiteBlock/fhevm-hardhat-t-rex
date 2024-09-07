@@ -109,10 +109,10 @@ contract ConditionalTransferModule is AbstractModuleUpgradeable {
         address[] calldata _from,
         address[] calldata _to,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) external onlyComplianceCall {
         for (uint256 i = 0; i < _from.length; i++) {
-            approveTransfer(_from[i], _to[i], _encryptedAmount[i], _inputProof[i]);
+            approveTransfer(_from[i], _to[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -141,10 +141,10 @@ contract ConditionalTransferModule is AbstractModuleUpgradeable {
         address[] calldata _from,
         address[] calldata _to,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) external onlyComplianceCall {
         for (uint256 i = 0; i < _from.length; i++) {
-            unApproveTransfer(_from[i], _to[i], _encryptedAmount[i], _inputProof[i]);
+            unApproveTransfer(_from[i], _to[i], _encryptedAmount[i], _inputProof);
         }
     }
 

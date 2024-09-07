@@ -171,7 +171,7 @@ contract MaxBalanceModule is AbstractModuleUpgradeable {
         address _compliance,
         address[] calldata _id,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) public {
         if (_id.length == 0 || _id.length != _encryptedAmount.length) {
             revert InvalidPresetValues(_compliance, _id);
@@ -186,7 +186,7 @@ contract MaxBalanceModule is AbstractModuleUpgradeable {
         }
 
         for (uint256 i = 0; i < _id.length; i++) {
-            _preSetModuleState(_compliance, _id[i], TFHE.asEuint64(_encryptedAmount[i], _inputProof[i]));
+            _preSetModuleState(_compliance, _id[i], TFHE.asEuint64(_encryptedAmount[i], _inputProof));
         }
 
         _compliancePresetStatus[_compliance] = true;

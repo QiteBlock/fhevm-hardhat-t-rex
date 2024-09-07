@@ -220,13 +220,9 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         emit Unpaused(msg.sender);
     }
 
-    function batchTransfer(
-        address[] calldata _toList,
-        einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
-    ) external {
+    function batchTransfer(address[] calldata _toList, einput[] calldata _encryptedAmount, bytes calldata _inputProof) external {
         for (uint256 i = 0; i < _toList.length; i++) {
-            transfer(_toList[i], _encryptedAmount[i], _inputProof[i]);
+            transfer(_toList[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -301,10 +297,10 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         address[] calldata _fromList,
         address[] calldata _toList,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) external {
         for (uint256 i = 0; i < _toList.length; i++) {
-            forcedTransfer(_fromList[i], _toList[i], _encryptedAmount[i], _inputProof[i]);
+            forcedTransfer(_fromList[i], _toList[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -321,9 +317,9 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         }
     }
 
-    function batchMint(address[] calldata _toList, einput[] calldata _encryptedAmount, bytes[] calldata _inputProof) external {
+    function batchMint(address[] calldata _toList, einput[] calldata _encryptedAmount, bytes calldata _inputProof) external {
         for (uint256 i = 0; i < _toList.length; i++) {
-            mint(_toList[i], _encryptedAmount[i], _inputProof[i]);
+            mint(_toList[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -336,9 +332,9 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         }
     }
 
-    function batchBurn(address[] calldata _toList, einput[] calldata _encryptedAmount, bytes[] calldata _inputProof) external {
+    function batchBurn(address[] calldata _toList, einput[] calldata _encryptedAmount, bytes calldata _inputProof) external {
         for (uint256 i = 0; i < _toList.length; i++) {
-            burn(_toList[i], _encryptedAmount[i], _inputProof[i]);
+            burn(_toList[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -363,10 +359,10 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
     function batchFreezePartialTokens(
         address[] calldata _userAddresses,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) external {
         for (uint256 i = 0; i < _userAddresses.length; i++) {
-            freezePartialTokens(_userAddresses[i], _encryptedAmount[i], _inputProof[i]);
+            freezePartialTokens(_userAddresses[i], _encryptedAmount[i], _inputProof);
         }
     }
 
@@ -382,10 +378,10 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
     function batchUnfreezePartialTokens(
         address[] calldata _userAddresses,
         einput[] calldata _encryptedAmount,
-        bytes[] calldata _inputProof
+        bytes calldata _inputProof
     ) external {
         for (uint256 i = 0; i < _userAddresses.length; i++) {
-            unfreezePartialTokens(_userAddresses[i], _encryptedAmount[i], _inputProof[i]);
+            unfreezePartialTokens(_userAddresses[i], _encryptedAmount[i], _inputProof);
         }
     }
 

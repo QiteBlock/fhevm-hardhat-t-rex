@@ -198,7 +198,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
               await context.suite.token.getAddress(),
               context.accounts.signers.tokenAgent.address
             );
-            inputTokenAgent1.add64(1000);
+            inputTokenAgent1.add64(1000).add64(10000).add64(100000).add64(1000000);
             const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
             await context.suite.compliance.callModuleFunction(
               new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -207,43 +207,25 @@ describe("Compliance Module: TimeTransferLimits", () => {
               ),
               await context.suite.complianceModule.getAddress()
             );
-            const inputTokenAgent2 = instances.tokenAgent.createEncryptedInput(
-              await context.suite.token.getAddress(),
-              context.accounts.signers.tokenAgent.address
-            );
-            inputTokenAgent2.add64(10000);
-            const encryptedMaxAmount2 = inputTokenAgent2.encrypt();
             await context.suite.compliance.callModuleFunction(
               new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
                 "setTimeTransferLimit",
-                [30, encryptedMaxAmount2.handles[0], encryptedMaxAmount2.inputProof]
+                [30, encryptedMaxAmount1.handles[1], encryptedMaxAmount1.inputProof]
               ),
               await context.suite.complianceModule.getAddress()
             );
-            const inputTokenAgent3 = instances.tokenAgent.createEncryptedInput(
-              await context.suite.token.getAddress(),
-              context.accounts.signers.tokenAgent.address
-            );
-            inputTokenAgent3.add64(100000);
-            const encryptedMaxAmount3 = inputTokenAgent3.encrypt();
             await context.suite.compliance.callModuleFunction(
               new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
                 "setTimeTransferLimit",
-                [365, encryptedMaxAmount3.handles[0], encryptedMaxAmount3.inputProof]
+                [365, encryptedMaxAmount1.handles[2], encryptedMaxAmount1.inputProof]
               ),
               await context.suite.complianceModule.getAddress()
             );
-            const inputTokenAgent4 = instances.tokenAgent.createEncryptedInput(
-              await context.suite.token.getAddress(),
-              context.accounts.signers.tokenAgent.address
-            );
-            inputTokenAgent4.add64(1000000);
-            const encryptedMaxAmount4 = inputTokenAgent4.encrypt();
             await expect(
               context.suite.compliance.callModuleFunction(
                 new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
                   "setTimeTransferLimit",
-                  [3650, encryptedMaxAmount4.handles[0], encryptedMaxAmount4.inputProof]
+                  [3650, encryptedMaxAmount1.handles[3], encryptedMaxAmount1.inputProof]
                 ),
                 await context.suite.complianceModule.getAddress()
               )
@@ -300,7 +282,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
           await context.suite.token.getAddress(),
           context.accounts.signers.tokenAgent.address
         );
-        inputTokenAgent.add64(120);
+        inputTokenAgent.add64(120).add64(100);
         const encryptedMaxAmount = inputTokenAgent.encrypt();
         await context.suite.compliance.callModuleFunction(
           new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -309,16 +291,10 @@ describe("Compliance Module: TimeTransferLimits", () => {
           ),
           await context.suite.complianceModule.getAddress()
         );
-        const inputTokenAgent1 = instances.tokenAgent.createEncryptedInput(
-          await context.suite.token.getAddress(),
-          context.accounts.signers.tokenAgent.address
-        );
-        inputTokenAgent1.add64(100);
-        const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
         await context.suite.compliance.callModuleFunction(
           new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
             "setTimeTransferLimit",
-            [15, encryptedMaxAmount1.handles[0], encryptedMaxAmount1.inputProof]
+            [15, encryptedMaxAmount.handles[1], encryptedMaxAmount.inputProof]
           ),
           await context.suite.complianceModule.getAddress()
         );
@@ -361,7 +337,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.tokenAgent.address
           );
-          inputTokenAgent.add64(120);
+          inputTokenAgent.add64(120).add64(100);
           const encryptedMaxAmount = inputTokenAgent.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -370,16 +346,10 @@ describe("Compliance Module: TimeTransferLimits", () => {
             ),
             await context.suite.complianceModule.getAddress()
           );
-          const inputTokenAgent1 = instances.tokenAgent.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.tokenAgent.address
-          );
-          inputTokenAgent1.add64(100);
-          const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
               "setTimeTransferLimit",
-              [15, encryptedMaxAmount1.handles[0], encryptedMaxAmount1.inputProof]
+              [15, encryptedMaxAmount.handles[1], encryptedMaxAmount.inputProof]
             ),
             await context.suite.complianceModule.getAddress()
           );
@@ -426,7 +396,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.tokenAgent.address
           );
-          inputTokenAgent.add64(120);
+          inputTokenAgent.add64(120).add64(100);
           const encryptedMaxAmount = inputTokenAgent.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -435,17 +405,10 @@ describe("Compliance Module: TimeTransferLimits", () => {
             ),
             await context.suite.complianceModule.getAddress()
           );
-
-          const inputTokenAgent1 = instances.tokenAgent.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.tokenAgent.address
-          );
-          inputTokenAgent1.add64(100);
-          const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
               "setTimeTransferLimit",
-              [150, encryptedMaxAmount1.handles[0], encryptedMaxAmount1.inputProof]
+              [150, encryptedMaxAmount.handles[1], encryptedMaxAmount.inputProof]
             ),
             await context.suite.complianceModule.getAddress()
           );
@@ -454,7 +417,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.aliceWallet.address
           );
-          inputAlice.add64(20);
+          inputAlice.add64(20).add64(30);
           const encryptedTransferAmount = inputAlice.encrypt();
           const tx = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
@@ -463,16 +426,9 @@ describe("Compliance Module: TimeTransferLimits", () => {
 
           const blockTimestamp = await time.latest();
           await time.increase(10);
-
-          const inputAlice1 = instances.aliceWallet.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.aliceWallet.address
-          );
-          inputAlice1.add64(30);
-          const encryptedTransferAmount1 = inputAlice1.encrypt();
           const tx1 = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
-            ["transfer(address,bytes32,bytes)"](to, encryptedTransferAmount1.handles[0], encryptedTransferAmount1.inputProof);
+            ["transfer(address,bytes32,bytes)"](to, encryptedTransferAmount.handles[1], encryptedTransferAmount.inputProof);
           await tx1.wait();
 
           const counter1 = await context.suite.complianceModule.usersCounters(
@@ -505,7 +461,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.tokenAgent.address
           );
-          inputTokenAgent.add64(120);
+          inputTokenAgent.add64(120).add64(100);
           const encryptedMaxAmount = inputTokenAgent.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
@@ -514,17 +470,10 @@ describe("Compliance Module: TimeTransferLimits", () => {
             ),
             await context.suite.complianceModule.getAddress()
           );
-
-          const inputTokenAgent1 = instances.tokenAgent.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.tokenAgent.address
-          );
-          inputTokenAgent1.add64(100);
-          const encryptedMaxAmount1 = inputTokenAgent1.encrypt();
           await context.suite.compliance.callModuleFunction(
             new ethers.Interface(["function setTimeTransferLimit(uint32,bytes32,bytes)"]).encodeFunctionData(
               "setTimeTransferLimit",
-              [150, encryptedMaxAmount1.handles[0], encryptedMaxAmount1.inputProof]
+              [150, encryptedMaxAmount.handles[1], encryptedMaxAmount.inputProof]
             ),
             await context.suite.complianceModule.getAddress()
           );
@@ -533,7 +482,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.aliceWallet.address
           );
-          inputAlice.add64(20);
+          inputAlice.add64(20).add64(30);
           const encryptedTransferAmount = inputAlice.encrypt();
           const tx = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
@@ -541,16 +490,9 @@ describe("Compliance Module: TimeTransferLimits", () => {
           await tx.wait();
           const blockTimestamp = await time.latest();
           await time.increase(30);
-
-          const inputAlice1 = instances.aliceWallet.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.aliceWallet.address
-          );
-          inputAlice1.add64(30);
-          const encryptedTransferAmount1 = inputAlice1.encrypt();
           const tx1 = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
-            ["transfer(address,bytes32,bytes)"](to, encryptedTransferAmount1.handles[0], encryptedTransferAmount1.inputProof);
+            ["transfer(address,bytes32,bytes)"](to, encryptedTransferAmount.handles[1], encryptedTransferAmount.inputProof);
           await tx1.wait();
           const resetTimestamp = await time.latest();
 
@@ -679,7 +621,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.aliceWallet.address
           );
-          inputAlice.add64(100);
+          inputAlice.add64(100).add64(100);
           const encryptedTransferAmount = inputAlice.encrypt();
           const tx = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
@@ -689,19 +631,12 @@ describe("Compliance Module: TimeTransferLimits", () => {
               encryptedTransferAmount.inputProof
             );
           await tx.wait();
-
-          const inputAlice1 = instances.aliceWallet.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.aliceWallet.address
-          );
-          inputAlice1.add64(100);
-          const encryptedTransferAmount1 = inputAlice1.encrypt();
           const tx1 = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
             ["transfer(address,bytes32,bytes)"](
               context.accounts.signers.bobWallet.address,
-              encryptedTransferAmount1.handles[0],
-              encryptedTransferAmount1.inputProof
+              encryptedTransferAmount.handles[1],
+              encryptedTransferAmount.inputProof
             );
           await tx1.wait();
           // Important : As there are no more revert because the balance amount is encrypted. We can only do TFHE comparisons.
@@ -735,7 +670,7 @@ describe("Compliance Module: TimeTransferLimits", () => {
             await context.suite.token.getAddress(),
             context.accounts.signers.aliceWallet.address
           );
-          inputAlice.add64(100);
+          inputAlice.add64(100).add64(100);
           const encryptedTransferAmount = inputAlice.encrypt();
           const tx = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
@@ -746,18 +681,12 @@ describe("Compliance Module: TimeTransferLimits", () => {
             );
           await tx.wait();
           await time.increase(30);
-          const inputAlice1 = instances.aliceWallet.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            context.accounts.signers.aliceWallet.address
-          );
-          inputAlice1.add64(100);
-          const encryptedTransferAmount1 = inputAlice1.encrypt();
           const tx1 = await context.suite.token
             .connect(context.accounts.signers.aliceWallet)
             ["transfer(address,bytes32,bytes)"](
               context.accounts.signers.bobWallet.address,
-              encryptedTransferAmount1.handles[0],
-              encryptedTransferAmount1.inputProof
+              encryptedTransferAmount.handles[1],
+              encryptedTransferAmount.inputProof
             );
           await tx1.wait();
           const balanceHandle = await context.suite.token.balanceOf(context.accounts.signers.bobWallet);

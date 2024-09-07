@@ -461,18 +461,15 @@ describe("Token - Transfers", () => {
         await moduleCountry.getAddress()
       );
       const inputAlice1 = instances.aliceWallet.createEncryptedInput(await token.getAddress(), signers.aliceWallet.address);
-      const inputAlice2 = instances.aliceWallet.createEncryptedInput(await token.getAddress(), signers.aliceWallet.address);
       const addresses = [signers.bobWallet.address, signers.bobWallet.address];
-      inputAlice1.add64(100);
-      inputAlice2.add64(200);
+      inputAlice1.add64(100).add64(200);
       const encryptedTransferAmount1 = inputAlice1.encrypt();
-      const encryptedTransferAmount2 = inputAlice2.encrypt();
       const tx = await token
         .connect(signers.aliceWallet)
-        ["batchTransfer(address[],bytes32[],bytes[])"](
+        ["batchTransfer(address[],bytes32[],bytes)"](
           addresses,
-          [encryptedTransferAmount1.handles[0], encryptedTransferAmount2.handles[0]],
-          [encryptedTransferAmount1.inputProof, encryptedTransferAmount2.inputProof]
+          [encryptedTransferAmount1.handles[0], encryptedTransferAmount1.handles[1]],
+          encryptedTransferAmount1.inputProof
         );
       await tx.wait();
       const balanceHandleAfter = await token.balanceOf(signers.aliceWallet);
@@ -858,26 +855,23 @@ describe("Token - Transfers", () => {
         const balance = await decrypt64(balanceHandle);
         const snapshotId = await ethers.provider.send("evm_snapshot");
         const inputAgent = instances.tokenAgent.createEncryptedInput(await token.getAddress(), signers.tokenAgent.address);
-        inputAgent.add64(balance - BigInt(100));
-        const encryptedFreezeAmount = inputAgent.encrypt();
+        inputAgent.add64(balance - BigInt(100)).add64(balance - BigInt(50));
+        const encryptedAmount = inputAgent.encrypt();
         const t1 = await token
           .connect(signers.tokenAgent)
           ["freezePartialTokens(address,bytes32,bytes)"](
             signers.aliceWallet.address,
-            encryptedFreezeAmount.handles[0],
-            encryptedFreezeAmount.inputProof
+            encryptedAmount.handles[0],
+            encryptedAmount.inputProof
           );
         await t1.wait();
-        const inputTokenAgent = instances.tokenAgent.createEncryptedInput(await token.getAddress(), signers.tokenAgent.address);
-        inputTokenAgent.add64(balance - BigInt(50));
-        const encryptedTransferAmount = inputTokenAgent.encrypt();
         const tx = await token
           .connect(signers.tokenAgent)
           ["forcedTransfer(address,address,bytes32,bytes)"](
             signers.aliceWallet.address,
             signers.bobWallet.address,
-            encryptedTransferAmount.handles[0],
-            encryptedTransferAmount.inputProof
+            encryptedAmount.handles[1],
+            encryptedAmount.inputProof
           );
         await tx.wait();
         const balanceFrozen = await token.getFrozenTokens(signers.aliceWallet.address);
@@ -935,26 +929,22 @@ describe("Token - Transfers", () => {
         const balanceHandle = await token.balanceOf(signers.aliceWallet.address);
         const balance = await decrypt64(balanceHandle);
         const inputAgent = instances.tokenAgent.createEncryptedInput(await token.getAddress(), signers.tokenAgent.address);
-        inputAgent.add64(balance - BigInt(100));
-        const encryptedFreezeAmount = inputAgent.encrypt();
+        inputAgent.add64(balance - BigInt(100)).add64(balance - BigInt(50));
+        const encryptedAmount = inputAgent.encrypt();
         const t1 = await token
           .connect(signers.tokenAgent)
           ["freezePartialTokens(address,bytes32,bytes)"](
             signers.aliceWallet.address,
-            encryptedFreezeAmount.handles[0],
-            encryptedFreezeAmount.inputProof
+            encryptedAmount.handles[0],
+            encryptedAmount.inputProof
           );
         await t1.wait();
-
-        const inputTokenAgent = instances.tokenAgent.createEncryptedInput(await token.getAddress(), signers.tokenAgent.address);
-        inputTokenAgent.add64(balance - BigInt(50));
-        const encryptedTransferAmount = inputTokenAgent.encrypt();
         const tx = await token
           .connect(signers.tokenAgent)
           ["burn(address,bytes32,bytes)"](
             signers.aliceWallet.address,
-            encryptedTransferAmount.handles[0],
-            encryptedTransferAmount.inputProof
+            encryptedAmount.handles[1],
+            encryptedAmount.inputProof
           );
         await tx.wait();
 

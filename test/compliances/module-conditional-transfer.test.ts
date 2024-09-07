@@ -165,11 +165,11 @@ describe("ConditionalTransferModule", () => {
         await expect(
           conditionalTransferModule
             .connect(signers.anotherWallet)
-            ["batchApproveTransfers(address[], address[],bytes32[], bytes[])"](
+            ["batchApproveTransfers(address[], address[],bytes32[], bytes)"](
               [signers.anotherWallet.address],
               [signers.anotherWallet.address],
               [encryptedTransferAmount.handles[0]],
-              [encryptedTransferAmount.inputProof]
+              encryptedTransferAmount.inputProof
             )
         ).to.be.revertedWith("only bound compliance can call");
       });
@@ -190,13 +190,13 @@ describe("ConditionalTransferModule", () => {
         const tx = await compliance
           .connect(signers.deployer)
           .callModuleFunction(
-            new ethers.Interface(["function batchApproveTransfers(address[], address[],bytes32[], bytes[])"]).encodeFunctionData(
+            new ethers.Interface(["function batchApproveTransfers(address[], address[],bytes32[], bytes)"]).encodeFunctionData(
               "batchApproveTransfers",
               [
                 [signers.aliceWallet.address],
                 [signers.bobWallet.address],
                 [encryptedTransferAmount.handles[0]],
-                [encryptedTransferAmount.inputProof],
+                encryptedTransferAmount.inputProof,
               ]
             ),
             await conditionalTransferModule.getAddress()
@@ -241,11 +241,11 @@ describe("ConditionalTransferModule", () => {
         await expect(
           conditionalTransferModule
             .connect(signers.anotherWallet)
-            ["batchUnApproveTransfers(address[], address[],bytes32[], bytes[])"](
+            ["batchUnApproveTransfers(address[], address[],bytes32[], bytes)"](
               [signers.anotherWallet.address],
               [signers.anotherWallet.address],
               [encryptedTransferAmount.handles[0]],
-              [encryptedTransferAmount.inputProof]
+              encryptedTransferAmount.inputProof
             )
         ).to.be.revertedWith("only bound compliance can call");
       });
@@ -270,12 +270,12 @@ describe("ConditionalTransferModule", () => {
               .connect(signers.deployer)
               .callModuleFunction(
                 new ethers.Interface([
-                  "function batchUnApproveTransfers(address[], address[], bytes32[], bytes[])",
+                  "function batchUnApproveTransfers(address[], address[], bytes32[], bytes)",
                 ]).encodeFunctionData("batchUnApproveTransfers", [
                   [signers.aliceWallet.address],
                   [signers.bobWallet.address],
                   [encryptedTransferAmount.handles[0]],
-                  [encryptedTransferAmount.inputProof],
+                  encryptedTransferAmount.inputProof,
                 ]),
                 await conditionalTransferModule.getAddress()
               )
@@ -296,13 +296,13 @@ describe("ConditionalTransferModule", () => {
         await compliance
           .connect(signers.deployer)
           .callModuleFunction(
-            new ethers.Interface(["function batchApproveTransfers(address[], address[], bytes32[], bytes[])"]).encodeFunctionData(
+            new ethers.Interface(["function batchApproveTransfers(address[], address[], bytes32[], bytes)"]).encodeFunctionData(
               "batchApproveTransfers",
               [
                 [signers.aliceWallet.address],
                 [signers.bobWallet.address],
                 [encryptedTransferAmount.handles[0]],
-                [encryptedTransferAmount.inputProof],
+                encryptedTransferAmount.inputProof,
               ]
             ),
             await conditionalTransferModule.getAddress()
@@ -312,12 +312,12 @@ describe("ConditionalTransferModule", () => {
           .connect(signers.deployer)
           .callModuleFunction(
             new ethers.Interface([
-              "function batchUnApproveTransfers(address[], address[], bytes32[], bytes[])",
+              "function batchUnApproveTransfers(address[], address[], bytes32[], bytes)",
             ]).encodeFunctionData("batchUnApproveTransfers", [
               [signers.aliceWallet.address],
               [signers.bobWallet.address],
               [encryptedTransferAmount.handles[0]],
-              [encryptedTransferAmount.inputProof],
+              encryptedTransferAmount.inputProof,
             ]),
             await conditionalTransferModule.getAddress()
           );
@@ -434,12 +434,12 @@ describe("ConditionalTransferModule", () => {
             .connect(signers.deployer)
             .callModuleFunction(
               new ethers.Interface([
-                "function batchApproveTransfers(address[], address[], bytes32[], bytes[])",
+                "function batchApproveTransfers(address[], address[], bytes32[], bytes)",
               ]).encodeFunctionData("batchApproveTransfers", [
                 [signers.aliceWallet.address],
                 [signers.bobWallet.address],
                 [encryptedTransferAmount.handles[0]],
-                [encryptedTransferAmount.inputProof],
+                encryptedTransferAmount.inputProof,
               ]),
               await conditionalTransferModule.getAddress()
             );

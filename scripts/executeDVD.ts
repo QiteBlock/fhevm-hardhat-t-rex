@@ -139,33 +139,26 @@ async function executeDVD() {
 async function initiateTransfer(instances: FhevmInstances, tokenA: any, tokenB: any, signers: any, transferManager: any) {
   // Approve the usage of transfer manager of the tokenA to swap
   const inputAlice = instances.aliceWallet.createEncryptedInput(await tokenA.getAddress(), signers.aliceWallet.address);
-  inputAlice.add64(1000);
-  const encryptedAllowanceAmount = inputAlice.encrypt();
+  inputAlice.add64(1000).add64(500);
+  const encryptedAmount = inputAlice.encrypt();
   const tx1 = await tokenA
     .connect(signers.aliceWallet)
     ["approve(address,bytes32,bytes)"](
       await transferManager.getAddress(),
-      encryptedAllowanceAmount.handles[0],
-      encryptedAllowanceAmount.inputProof
+      encryptedAmount.handles[0],
+      encryptedAmount.inputProof
     );
   await tx1.wait();
   // Initiate the exchange of 1000 tokenA from Alice with 500 tokenB of Bob
-  const inputAlice1 = instances.aliceWallet.createEncryptedInput(await tokenA.getAddress(), signers.aliceWallet.address);
-  inputAlice1.add64(1000);
-  const encryptedInitTransfer = inputAlice1.encrypt();
-  const inputBob = instances.bobWallet.createEncryptedInput(await tokenB.getAddress(), signers.bobWallet.address);
-  inputBob.add64(500);
-  const encryptedInitTransfer2 = inputBob.encrypt();
   const tx2 = await transferManager
     .connect(signers.aliceWallet)
-    .initiateDVDTransfer(
+    ["initiateDVDTransfer(address,bytes32,bytes32,bytes,address,address)"](
       await tokenA.getAddress(),
-      encryptedInitTransfer.handles[0],
-      encryptedInitTransfer.inputProof,
+      encryptedAmount.handles[0],
+      encryptedAmount.handles[1],
+      encryptedAmount.inputProof,
       signers.bobWallet.address,
-      await tokenB.getAddress(),
-      encryptedInitTransfer2.handles[0],
-      encryptedInitTransfer2.inputProof
+      await tokenB.getAddress()
     );
 
   const txReceipt = await tx2.wait();

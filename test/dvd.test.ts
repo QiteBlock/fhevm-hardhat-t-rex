@@ -82,41 +82,26 @@ describe("DVDTransferManager", () => {
           await contextTokenA.suite.token.getAddress(),
           contextTokenA.accounts.signers.aliceWallet.address
         );
-        inputAlice.add64(1000);
-        const encryptedAllowanceAmount = inputAlice.encrypt();
+        inputAlice.add64(1000).add64(500);
+        const encryptedAmount = inputAlice.encrypt();
         const tx1 = await contextTokenA.suite.token
           .connect(contextTokenA.accounts.signers.aliceWallet)
           ["approve(address,bytes32,bytes)"](
             await transferManager.getAddress(),
-            encryptedAllowanceAmount.handles[0],
-            encryptedAllowanceAmount.inputProof
+            encryptedAmount.handles[0],
+            encryptedAmount.inputProof
           );
         await tx1.wait();
-
-        // When calling the DvD Contract to initiate DvD Transfer Alice need to create encrypted input for the amount
-        const inputAlice1 = instances.aliceWallet.createEncryptedInput(
-          await contextTokenA.suite.token.getAddress(),
-          contextTokenA.accounts.signers.aliceWallet.address
-        );
-        inputAlice1.add64(1000);
-        const encryptedInitTransfer = inputAlice1.encrypt();
-        const inputBob = instances.bobWallet.createEncryptedInput(
-          await contextTokenB.suite.token.getAddress(),
-          contextTokenB.accounts.signers.bobWallet.address
-        );
-        inputBob.add64(500);
-        const encryptedInitTransfer2 = inputBob.encrypt();
         // Call initiate transfer (There is no transfer for now)
         const tx2 = await transferManager
           .connect(contextTokenA.accounts.signers.aliceWallet)
-          .initiateDVDTransfer(
+          ["initiateDVDTransfer(address,bytes32,bytes32,bytes,address,address)"](
             await contextTokenA.suite.token.getAddress(),
-            encryptedInitTransfer.handles[0],
-            encryptedInitTransfer.inputProof,
+            encryptedAmount.handles[0],
+            encryptedAmount.handles[1],
+            encryptedAmount.inputProof,
             contextTokenA.accounts.signers.bobWallet.address,
-            await contextTokenB.suite.token.getAddress(),
-            encryptedInitTransfer2.handles[0],
-            encryptedInitTransfer2.inputProof
+            await contextTokenB.suite.token.getAddress()
           );
 
         const txReceipt = await tx2.wait();
@@ -135,29 +120,23 @@ describe("DVDTransferManager", () => {
           contextTokenB.accounts.signers.tokenAgent.address
         );
         inputTokenAgent.add64(500);
-        const encryptedMintAmount = inputTokenAgent.encrypt();
+        const encryptedAmount = inputTokenAgent.encrypt();
         const tx1 = await contextTokenB.suite.token
           .connect(contextTokenB.accounts.signers.tokenAgent)
           ["mint(address,bytes32,bytes)"](
             contextTokenB.accounts.signers.bobWallet.address,
-            encryptedMintAmount.handles[0],
-            encryptedMintAmount.inputProof
+            encryptedAmount.handles[0],
+            encryptedAmount.inputProof
           );
         await tx1.wait();
 
         // Same Bob need to approve the DvD contract to use his token
-        const inputBob = instances.bobWallet.createEncryptedInput(
-          await contextTokenB.suite.token.getAddress(),
-          contextTokenB.accounts.signers.bobWallet.address
-        );
-        inputBob.add64(500);
-        const encryptedAllowanceAmount = inputBob.encrypt();
         const tx2 = await contextTokenB.suite.token
           .connect(contextTokenA.accounts.signers.bobWallet)
           ["approve(address,bytes32,bytes)"](
             await transferManager.getAddress(),
-            encryptedAllowanceAmount.handles[0],
-            encryptedAllowanceAmount.inputProof
+            encryptedAmount.handles[0],
+            encryptedAmount.inputProof
           );
         await tx2.wait();
 

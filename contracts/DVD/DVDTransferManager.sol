@@ -128,29 +128,27 @@ contract DVDTransferManager is Ownable {
      *  @param _token1 the address of the token (ERC20 or TREX) provided by `msg.sender`
      *  @param _encryptedAmountToken1 the amount of `_token1` encrypted that `msg.sender` will send to
      *  `_counterpart` at DVD execution time
-     *  @param _inputProofToken1 the proof that the msg.sender have access to the cypher
+     *  @param _encryptedAmountToken2 the amount of `_token2` encrypted that `_counterpart` will send to
+     *  `msg.sender` at DVD execution time
+     *  @param _inputProof the proof that the msg.sender have access to the cypher
      *  @param _counterpart the address of the counterpart, which will receive `_token1Amount` of
      *  `_token1` in exchange for `_token2Amount` of `_token2`
      *  @param _token2 the address of the token (ERC20 or TREX) provided by `_counterpart`
-     *  @param _encryptedAmountToken2 the amount of `_token2` encrypted that `_counterpart` will send to
-     *  `msg.sender` at DVD execution time
-     *  @param _inputProofToken2 the proof that the msg.sender have access to the cypher
      */
     function initiateDVDTransfer(
         address _token1,
         einput _encryptedAmountToken1,
-        bytes calldata _inputProofToken1,
-        address _counterpart,
-        address _token2,
         einput _encryptedAmountToken2,
-        bytes calldata _inputProofToken2
+        bytes calldata _inputProof,
+        address _counterpart,
+        address _token2
     ) external {
         initiateDVDTransfer(
             _token1,
-            TFHE.asEuint64(_encryptedAmountToken1, _inputProofToken1),
+            TFHE.asEuint64(_encryptedAmountToken1, _inputProof),
             _counterpart,
             _token2,
-            TFHE.asEuint64(_encryptedAmountToken2, _inputProofToken2)
+            TFHE.asEuint64(_encryptedAmountToken2, _inputProof)
         );
     }
 

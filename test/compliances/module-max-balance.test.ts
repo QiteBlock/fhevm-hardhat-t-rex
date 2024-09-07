@@ -299,23 +299,16 @@ describe("Compliance Module: MaxBalance", () => {
             await context.suite.token.getAddress(),
             signers.deployer.address
           );
-          inputDeployer1.add64(100);
+          inputDeployer1.add64(100).add64(200);
           const encryptedTransferAmount1 = inputDeployer1.encrypt();
-
-          const inputDeployer2 = instances.deployer.createEncryptedInput(
-            await context.suite.token.getAddress(),
-            signers.deployer.address
-          );
-          inputDeployer2.add64(200);
-          const encryptedTransferAmount2 = inputDeployer2.encrypt();
 
           const tx = await complianceModule
             .connect(context.accounts.signers.deployer)
-            ["batchPreSetModuleState(address,address[],bytes32[],bytes[])"](
+            ["batchPreSetModuleState(address,address[],bytes32[],bytes)"](
               await context.suite.compliance.getAddress(),
               [context.accounts.signers.aliceWallet.address, context.accounts.signers.bobWallet.address],
-              [encryptedTransferAmount1.handles[0], encryptedTransferAmount2.handles[0]],
-              [encryptedTransferAmount1.inputProof, encryptedTransferAmount2.inputProof]
+              [encryptedTransferAmount1.handles[0], encryptedTransferAmount1.handles[1]],
+              encryptedTransferAmount1.inputProof
             );
 
           await expect(tx).to.emit(complianceModule, "IDBalancePreSet").to.emit(complianceModule, "IDBalancePreSet");
