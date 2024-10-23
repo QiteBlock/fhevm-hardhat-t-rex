@@ -1,5 +1,9 @@
 # FH-EVM T-Rex Token Protocol - Enhanced Privacy Edition
 
+## 1st place of Zama Season 6 Bounties
+
+https://github.com/zama-ai/bounty-program
+
 ## Overview
 
 This repository contains the upgraded version of the T-Rex Token protocol, integrating Fully Homomorphic Encryption Virtual Machine (FHEVM) technology. The protocol is designed to enhance the privacy of token transactions by hiding the transfer amounts, balances, and total supply of the T-Rex Token.
