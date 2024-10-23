@@ -100,6 +100,7 @@ contract SupplyLimitModule is AbstractModuleUpgradeable {
      *  emits an `SupplyLimitSet` event
      */
     function setSupplyLimit(euint64 _limit) public onlyComplianceCall {
+        require(TFHE.isSenderAllowed(_limit), "The caller is not authorized to access this _limit.");
         _supplyLimits[msg.sender] = _limit;
         TFHE.allow(_supplyLimits[msg.sender], address(this));
         TFHE.allow(_supplyLimits[msg.sender], msg.sender);

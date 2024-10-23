@@ -725,6 +725,7 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         _balances[_to] = newBalanceTo;
         TFHE.allow(_balances[_to], address(this));
         TFHE.allow(_balances[_to], _to);
+        TFHE.allow(_balances[_from], _from);
         euint64 newBalanceFrom = TFHE.sub(_balances[_from], transferValue);
         _balances[_from] = newBalanceFrom;
         TFHE.allow(_balances[_from], address(this));
@@ -798,9 +799,6 @@ contract Token is IToken, AgentRoleUpgradeable, TokenStorage {
         if (!investors[_to]) {
             investors[_to] = true;
             investorList.push(_to);
-        }
-        if (investors[_from]) {
-            investors[_from] = false;
         }
     }
 
