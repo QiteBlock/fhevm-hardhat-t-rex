@@ -4,6 +4,9 @@
 
 https://github.com/zama-ai/bounty-program
 
+![image](https://github.com/user-attachments/assets/047f0a0e-37a5-4c4a-8716-1416393efb26)
+
+
 ## Overview
 
 This repository contains the upgraded version of the T-Rex Token protocol, integrating Fully Homomorphic Encryption Virtual Machine (FHEVM) technology. The protocol is designed to enhance the privacy of token transactions by hiding the transfer amounts, balances, and total supply of the T-Rex Token.
